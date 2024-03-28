@@ -1,0 +1,42 @@
+2024-03-28 13:59:02.194 [info] Extension host with pid 25144 started
+2024-03-28 13:59:02.245 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2024-03-28 13:59:02.259 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2024-03-28 13:59:02.279 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2024-03-28 13:59:02.311 [info] Eager extensions activated
+2024-03-28 13:59:02.322 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2024-03-28 13:59:02.324 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2024-03-28 13:59:02.330 [info] ExtensionService#_doActivateExtension GitHub.copilot, startup: false, activationEvent: 'onStartupFinished'
+2024-03-28 13:59:02.380 [info] ExtensionService#_doActivateExtension GitHub.copilot-chat, startup: false, activationEvent: 'onStartupFinished'
+2024-03-28 13:59:02.489 [info] ExtensionService#_doActivateExtension vscode.github-authentication, startup: false, activationEvent: 'onAuthenticationRequest:github'
+2024-03-28 13:59:04.305 [info] Extension host terminating: renderer closed the MessagePort
+2024-03-28 13:59:04.386 [error] ProxyResolver#resolveProxy DIRECT Canceled: Canceled
+    at new $ (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:140:45885)
+    at s.U (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:147:5556)
+    at Proxy.z.<computed>.T.charCodeAt.z.<computed> (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:147:3007)
+    at A.resolveProxy (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:153:41297)
+    at Object.resolveProxy (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:135:33352)
+    at useProxySettings (/opt/visual-studio-code/resources/app/node_modules.asar/@vscode/proxy-agent/out/index.js:165:16)
+    at /opt/visual-studio-code/resources/app/node_modules.asar/@vscode/proxy-agent/out/index.js:113:13
+    at /opt/visual-studio-code/resources/app/node_modules.asar/@vscode/proxy-agent/out/index.js:459:13
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) 
+2024-03-28 13:59:04.387 [error] ProxyResolver#resolveProxy DIRECT Canceled: Canceled
+    at new $ (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:140:45885)
+    at s.U (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:147:5556)
+    at Proxy.z.<computed>.T.charCodeAt.z.<computed> (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:147:3007)
+    at A.resolveProxy (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:153:41297)
+    at Object.resolveProxy (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:135:33352)
+    at useProxySettings (/opt/visual-studio-code/resources/app/node_modules.asar/@vscode/proxy-agent/out/index.js:165:16)
+    at /opt/visual-studio-code/resources/app/node_modules.asar/@vscode/proxy-agent/out/index.js:113:13
+    at /opt/visual-studio-code/resources/app/node_modules.asar/@vscode/proxy-agent/out/index.js:459:13
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) 
+2024-03-28 13:59:04.387 [error] ProxyResolver#resolveProxy DIRECT Canceled: Canceled
+    at new $ (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:140:45885)
+    at s.U (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:147:5556)
+    at Proxy.z.<computed>.T.charCodeAt.z.<computed> (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:147:3007)
+    at A.resolveProxy (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:153:41297)
+    at Object.resolveProxy (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:135:33352)
+    at useProxySettings (/opt/visual-studio-code/resources/app/node_modules.asar/@vscode/proxy-agent/out/index.js:165:16)
+    at /opt/visual-studio-code/resources/app/node_modules.asar/@vscode/proxy-agent/out/index.js:113:13
+    at /opt/visual-studio-code/resources/app/node_modules.asar/@vscode/proxy-agent/out/index.js:459:13
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) 
+2024-03-28 13:59:04.405 [info] Extension host with pid 25144 exiting with code 0

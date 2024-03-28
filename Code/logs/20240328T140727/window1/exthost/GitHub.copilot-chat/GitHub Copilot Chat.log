@@ -1,0 +1,20 @@
+2024-03-28 14:07:43.100 [info] [FetcherService] Using Helix fetcher
+2024-03-28 14:07:43.100 [info] [gitExtensionService] Initializing Git extension service.
+2024-03-28 14:07:43.100 [info] [gitExtensionService] Successfully activated the vscode.git extension.
+2024-03-28 14:07:43.100 [info] [gitExtensionService] Enablement state of the vscode.git extension: true.
+2024-03-28 14:07:43.100 [info] [gitExtensionService] Successfully registered Git commit message provider.
+2024-03-28 14:07:43.343 [info] [auth] Logged in as jfakult
+2024-03-28 14:07:43.688 [info] [chat] copilot token chat_enabled: true
+2024-03-28 14:07:43.688 [info] [githubTitleAndDescriptionProvider] Initializing GitHub PR title and description provider provider.
+2024-03-28 14:07:43.688 [info] [githubTitleAndDescriptionProvider] GitHub.vscode-pull-request-github extension is not yet activated.
+2024-03-28 14:07:43.698 [info] [auth] Got Copilot token for jfakult
+2024-03-28 14:30:30.326 [info] [FetcherService] Using Helix fetcher
+2024-03-28 14:30:30.326 [info] [gitExtensionService] Initializing Git extension service.
+2024-03-28 14:30:30.326 [info] [gitExtensionService] Successfully activated the vscode.git extension.
+2024-03-28 14:30:30.326 [info] [gitExtensionService] Enablement state of the vscode.git extension: true.
+2024-03-28 14:30:30.326 [info] [gitExtensionService] Successfully registered Git commit message provider.
+2024-03-28 14:30:30.864 [info] [auth] Logged in as jfakult
+2024-03-28 14:30:31.233 [info] [chat] copilot token chat_enabled: true
+2024-03-28 14:30:31.233 [info] [githubTitleAndDescriptionProvider] Initializing GitHub PR title and description provider provider.
+2024-03-28 14:30:31.233 [info] [githubTitleAndDescriptionProvider] GitHub.vscode-pull-request-github extension is not yet activated.
+2024-03-28 14:30:31.242 [info] [auth] Got Copilot token for jfakult

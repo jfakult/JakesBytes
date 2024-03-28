@@ -1,0 +1,14 @@
+2024-03-26 18:03:21.872 [info] Extension host with pid 65764 started
+2024-03-26 18:03:21.872 [info] Skipping acquiring lock for /home/jake/.config/Code/User/workspaceStorage/4d96732a3644bf3fa1291c2f462fabd3.
+2024-03-26 18:03:21.945 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2024-03-26 18:03:21.994 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2024-03-26 18:03:22.009 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2024-03-26 18:03:22.035 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2024-03-26 18:03:22.103 [info] Eager extensions activated
+2024-03-26 18:03:22.133 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2024-03-26 18:03:22.135 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2024-03-26 18:03:22.141 [info] ExtensionService#_doActivateExtension GitHub.copilot, startup: false, activationEvent: 'onStartupFinished'
+2024-03-26 18:03:22.240 [info] ExtensionService#_doActivateExtension GitHub.copilot-chat, startup: false, activationEvent: 'onStartupFinished'
+2024-03-26 18:03:22.527 [info] ExtensionService#_doActivateExtension vscode.github-authentication, startup: false, activationEvent: 'onAuthenticationRequest:github'
+2024-03-26 18:05:19.705 [info] Extension host terminating: renderer closed the MessagePort
+2024-03-26 18:05:19.734 [info] Extension host with pid 65764 exiting with code 0

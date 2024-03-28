@@ -1,0 +1,74 @@
+2024/03/28-13:58:45.042 4 Reusing MANIFEST /home/jake/.config/chromium/Profile 1/Local Storage/leveldb/MANIFEST-000001
+2024/03/28-13:58:45.046 4 Recovering log #108
+2024/03/28-13:58:45.050 4 Level-0 table #112: started
+2024/03/28-13:58:45.056 4 Level-0 table #112: 256302 bytes OK
+2024/03/28-13:58:45.059 4 Delete type=0 #108
+2024/03/28-14:02:52.434 5 Level-0 table #115: started
+2024/03/28-14:02:52.447 5 Level-0 table #115: 46211 bytes OK
+2024/03/28-14:02:52.448 5 Delete type=0 #113
+2024/03/28-14:06:41.653 5 Level-0 table #117: started
+2024/03/28-14:06:41.667 5 Level-0 table #117: 35235 bytes OK
+2024/03/28-14:06:41.669 5 Delete type=0 #114
+2024/03/28-14:14:19.241 4 Level-0 table #119: started
+2024/03/28-14:14:19.243 4 Level-0 table #119: 46548 bytes OK
+2024/03/28-14:14:19.244 4 Delete type=0 #116
+2024/03/28-14:14:19.244 4 Compacting 4@0 + 1@1 files
+2024/03/28-14:14:19.250 4 Generated table #120@0: 520 keys, 613254 bytes
+2024/03/28-14:14:19.251 4 Compacted 4@0 + 1@1 files => 613254 bytes
+2024/03/28-14:14:19.251 4 compacted to: files[ 0 1 1 0 0 0 0 ]
+2024/03/28-14:14:19.252 4 Delete type=2 #115
+2024/03/28-14:14:19.252 4 Delete type=2 #112
+2024/03/28-14:14:19.252 4 Delete type=2 #117
+2024/03/28-14:14:19.252 4 Delete type=2 #110
+2024/03/28-14:14:19.252 4 Delete type=2 #119
+2024/03/28-14:16:59.873 5 Level-0 table #122: started
+2024/03/28-14:16:59.887 5 Level-0 table #122: 37177 bytes OK
+2024/03/28-14:16:59.889 5 Delete type=0 #118
+2024/03/28-14:19:52.435 5 Level-0 table #124: started
+2024/03/28-14:19:52.449 5 Level-0 table #124: 51711 bytes OK
+2024/03/28-14:19:52.451 5 Delete type=0 #121
+2024/03/28-14:24:44.111 5 Level-0 table #126: started
+2024/03/28-14:24:44.124 5 Level-0 table #126: 50928 bytes OK
+2024/03/28-14:24:44.126 5 Delete type=0 #123
+2024/03/28-14:31:27.062 4 Level-0 table #128: started
+2024/03/28-14:31:27.076 4 Level-0 table #128: 50623 bytes OK
+2024/03/28-14:31:27.077 4 Delete type=0 #125
+2024/03/28-14:31:27.078 4 Compacting 4@0 + 1@1 files
+2024/03/28-14:31:27.084 4 Generated table #129@0: 546 keys, 623708 bytes
+2024/03/28-14:31:27.084 4 Compacted 4@0 + 1@1 files => 623708 bytes
+2024/03/28-14:31:27.085 4 compacted to: files[ 0 1 1 0 0 0 0 ]
+2024/03/28-14:31:27.086 4 Delete type=2 #120
+2024/03/28-14:31:27.086 4 Delete type=2 #122
+2024/03/28-14:31:27.086 4 Delete type=2 #128
+2024/03/28-14:31:27.086 4 Delete type=2 #124
+2024/03/28-14:31:27.086 4 Delete type=2 #126
+2024/03/28-14:33:54.780 5 Level-0 table #131: started
+2024/03/28-14:33:54.798 5 Level-0 table #131: 258089 bytes OK
+2024/03/28-14:33:54.800 5 Delete type=0 #127
+2024/03/28-14:38:53.465 5 Level-0 table #133: started
+2024/03/28-14:38:53.479 5 Level-0 table #133: 40005 bytes OK
+2024/03/28-14:38:53.481 5 Delete type=0 #130
+2024/03/28-14:40:44.493 5 Level-0 table #135: started
+2024/03/28-14:40:44.508 5 Level-0 table #135: 49657 bytes OK
+2024/03/28-14:40:44.509 5 Delete type=0 #132
+2024/03/28-14:50:43.233 5 Level-0 table #137: started
+2024/03/28-14:50:43.248 5 Level-0 table #137: 39732 bytes OK
+2024/03/28-14:50:43.250 5 Delete type=0 #134
+2024/03/28-14:50:43.250 5 Compacting 4@0 + 1@1 files
+2024/03/28-14:50:43.257 5 Generated table #138@0: 568 keys, 623235 bytes
+2024/03/28-14:50:43.258 5 Compacted 4@0 + 1@1 files => 623235 bytes
+2024/03/28-14:50:43.259 5 compacted to: files[ 0 1 1 0 0 0 0 ]
+2024/03/28-14:50:43.259 5 Delete type=2 #129
+2024/03/28-14:50:43.259 5 Delete type=2 #135
+2024/03/28-14:50:43.259 5 Delete type=2 #133
+2024/03/28-14:50:43.259 5 Delete type=2 #137
+2024/03/28-14:50:43.259 5 Delete type=2 #131
+2024/03/28-14:51:27.349 5 Level-0 table #140: started
+2024/03/28-14:51:27.363 5 Level-0 table #140: 89267 bytes OK
+2024/03/28-14:51:27.364 5 Delete type=0 #136
+2024/03/28-14:56:52.586 5 Level-0 table #142: started
+2024/03/28-14:56:52.602 5 Level-0 table #142: 19519 bytes OK
+2024/03/28-14:56:52.607 5 Delete type=0 #139
+2024/03/28-15:11:13.849 5 Level-0 table #144: started
+2024/03/28-15:11:13.863 5 Level-0 table #144: 26952 bytes OK
+2024/03/28-15:11:13.865 5 Delete type=0 #141

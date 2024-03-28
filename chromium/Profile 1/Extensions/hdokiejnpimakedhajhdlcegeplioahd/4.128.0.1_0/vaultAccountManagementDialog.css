@@ -1,0 +1,126 @@
+/*Default Dialog Overrides*/
+
+#vaultAccountManagementDialog * {
+  box-sizing: border-box;
+}
+
+#vaultAccountManagementDialog .dialogContent {
+  overflow: hidden;
+  padding: 8px 24px;
+}
+
+#vaultAccountManagementDialog.dialog {
+  min-width: 590px;
+  max-width: 750px;
+  background-color: #ffffff;
+  background: radial-gradient(
+    28.31% 194.18% at 0% 0%,
+    #FBEBEB 6.82%,
+    #FFFFFF 33.33%,
+    #FFFFFF 100%);
+  border: 1px solid #D7DBE0;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  font-size: 13px;
+  color: #22303a;
+}
+
+#vaultAccountManagementDialog.dialog h1 {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 600;
+  padding: 8px 0;
+  color: inherit;
+}
+
+#vaultAccountManagementDialog.dialog a:hover {
+  text-decoration: underline;
+}
+
+#vaultAccountManagementDialog .dialogHeader {
+  display: none;
+}
+
+#vaultAccountManagementDialog .dialogHeaderInner {
+  display: none;
+}
+
+#vaultAccountManagementDialog .main-content {
+  position: relative;
+}
+
+#vaultAccountManagementDialog .close-dialog {
+  position: absolute;
+  top: 16px;
+  right: 6px;
+  cursor: pointer;
+}
+
+#vaultAccountManagementDialog .buttons.centerButtons {
+  display: none;
+}
+
+#vaultAccountManagementDialog .spinner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#vaultAccountManagementDialog .spinner img {
+  max-width: 50px;
+}
+
+#vaultAccountManagementDialog .spinner.is-hidden {
+  display: none;
+}
+
+#dialogOverlay {
+  pointer-events: none;
+}
+
+#vaultAccountManagementDialog .action_item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: none;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: 1px solid #D7DBE0;
+}
+#vaultAccountManagementDialog .action_item:last-child {
+  border-bottom: none;
+}
+#vaultAccountManagementDialog .action_item .info .info_title {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 20px;
+}
+#vaultAccountManagementDialog .action_item .info .info_content {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+#accountManagementUserEmail {
+  font-size: 16px;
+  line-height: 24px;
+}
+#vaultAccountManagementDialog .action_item .action {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 0 20px;
+}
+#vaultAccountManagementDialog .action_item .action #AM_deleteAccountButton {
+  color: #D32D27;
+  text-decoration: none;
+  margin-bottom: 0;
+}

@@ -1,0 +1,8 @@
+2024-03-28 14:03:06.420 [info] Started local extension host with pid 26469.
+2024-03-28 14:03:06.666 [error] Attempting to register step with id GitHub.copilot#copilotWelcome#copilot.chat twice. Second is dropped.: Error: Attempting to register step with id GitHub.copilot#copilotWelcome#copilot.chat twice. Second is dropped.
+    at vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2402:25644
+    at Array.forEach (<anonymous>)
+    at A._registerWalkthrough (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2402:25606)
+    at vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2402:23621
+    at async Promise.all (index 0)
+    at async A.W (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:2402:21687)

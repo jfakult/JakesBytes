@@ -1,0 +1,314 @@
+/*Default Dialog Overrides*/
+
+#vaultDeleteAccountDialog * {
+  box-sizing: border-box;
+}
+
+#vaultDeleteAccountDialog .dialogContent {
+  overflow: auto;
+  padding: 8px 24px;
+}
+
+#vaultDeleteAccountDialog.dialog {
+  width: 590px;
+  background-color: #ffffff;
+  background: radial-gradient(
+    28.31% 194.18% at 0% 0%,
+    #FBEBEB 6.82%,
+    #FFFFFF 33.33%,
+    #FFFFFF 100%);
+  border: 1px solid #D7DBE0;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  font-size: 13px;
+  color: #22303a;
+}
+
+#vaultDeleteAccountDialog.dialog h1 {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 600;
+  color: inherit;
+  padding: 8px 0;
+  margin-bottom: 8px;
+}
+
+#vaultDeleteAccountDialog.dialog a:hover {
+  text-decoration: underline;
+}
+
+#vaultDeleteAccountDialog .dialogHeader {
+  display: none;
+}
+
+#vaultDeleteAccountDialog .dialogHeaderInner {
+  display: none;
+}
+
+#vaultDeleteAccountDialog .main-content {
+  position: relative;
+}
+
+#vaultDeleteAccountDialog .close-dialog {
+  position: absolute;
+  top: 16px;
+  right: 6px;
+  cursor: pointer;
+}
+
+#vaultDeleteAccountDialog .buttons.centerButtons {
+  display: none;
+}
+
+#vaultDeleteAccountDialog .spinner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#vaultDeleteAccountDialog .spinner img {
+  max-width: 50px;
+}
+
+#vaultDeleteAccountDialog .spinner.is-hidden {
+  display: none;
+}
+
+#dialogOverlay {
+  pointer-events: none;
+}
+
+#vaultDeleteAccountDialog .content {
+  padding: 0;
+}
+
+#vaultDeleteAccountDialog .content .title {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 8px;
+}
+
+#vaultDeleteAccountDialog .warning {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #FBEBEB;
+  padding: 8px 12px;
+  border: 1px solid #D32D27;
+  border-radius: 4px;
+}
+
+#vaultDeleteAccountDialog .warning .warning-wrapper {
+  width: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+#vaultDeleteAccountDialog .warning .warning-icon {
+  width: 20px;
+  height: 20px;
+}
+
+#vaultDeleteAccountDialog .warning .warning-content {
+  font-size: 14px;
+  line-height: 24px;
+  margin-left: 12px;
+}
+
+#vaultDeleteAccountDialog .warning .warning-content .warning-title {
+  font-weight: 700;
+}
+
+#vaultDeleteAccountDialog .input-wrapper {
+  margin: 4px 0;
+  position: relative;
+}
+
+#vaultDeleteAccountDialog .input-wrapper .label {
+  margin: 0 0 4px 0;
+}
+
+#vaultDeleteAccountDialog .eye-icon {
+  position: absolute;
+  width: 22px;
+  height: 15px;
+  right: 13px;
+  bottom: 13px;
+  cursor: pointer;
+  color: rgb(90, 106, 129);
+}
+
+#vaultDeleteAccountDialog .eye-icon:hover {
+  color: rgb(27, 40, 60);
+}
+
+#vaultDeleteAccountDialog .credentials-input {
+  display: block;
+  width: 100%;
+  border: 1px solid #BAC0CA;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  margin: 0;
+}
+
+#vaultDeleteAccountDialog .credentials-input.show-error {
+  border-color: rgb(174, 98, 2);
+}
+
+#vaultDeleteAccountDialog .credentials-input:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(0,125,250,0.6);
+}
+
+#vaultDeleteAccountDialog .user-data .label {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+#vaultDeleteAccountDialog .user-data .input-wrapper .password-error-message {
+  display: none;
+  position: absolute;
+  color: rgb(174, 98, 2);
+  bottom: -16px;
+  font-size: 13px;
+}
+#vaultDeleteAccountDialog .user-data .input-wrapper .password-error-message.show-error {
+  display: block;
+}
+
+#vaultDeleteAccountDialog .reasons {
+  margin-top: 24px;
+}
+
+#vaultDeleteAccountDialog .reasons .reasons-title {
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 20px;
+  color: #1B283C;
+}
+
+#vaultDeleteAccountDialog .reasons .reasons-options > div {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+#vaultDeleteAccountDialog .reasons .reasons-options input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  background: #FFFFFF;
+  border-radius: 2px;
+  border: 1px solid #BAC0CA;
+}
+
+#vaultDeleteAccountDialog .reasons .reasons-options label {
+  color: #1B283C;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  margin-left: 8px;
+}
+
+#vaultDeleteAccountDialog .reasons .reasons-text {
+  margin-top: 24px;
+  display: flex;
+}
+
+#vaultDeleteAccountDialog .reasons .reasons-text textarea {
+  width: 100%;
+  padding: 4px 12px;
+  line-height: 24px;
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0;
+  background: #FFFFFF;
+  border: 1px solid #BAC0CA;
+  border-radius: 4px;
+}
+
+#vaultDeleteAccountDialog .reasons .reasons-text textarea:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(0,125,250,0.6);
+}
+
+#vaultDeleteAccountDialog .footer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+}
+
+#vaultDeleteAccountDialog .actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4px 0;
+}
+
+#vaultDeleteAccountDialog .error-message-container {
+  flex-grow: 1;
+}
+
+#vaultDeleteAccountDialog .error-message-container .error-message {
+  display: none;
+}
+
+#vaultDeleteAccountDialog .error-message-container .error-message.show-error {
+  display: flex;
+  border-radius: 4px;
+  background-color: rgb(174, 98, 2);
+  flex-direction: row;
+  padding: 8px 12px;
+  max-width: 440px;
+}
+
+#vaultDeleteAccountDialog .error-message-container .error-message-label {
+  color: #FFF;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  margin-left: 12px;
+}
+
+#vaultDeleteAccountDialog .actions button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 8px 20px;
+  border-radius: 4px;
+  color: #FFFFFF;
+}
+
+#vaultDeleteAccountDialog .actions #DA_cancelButton {
+  color: #007AFF;
+}
+
+#vaultDeleteAccountDialog .actions #DA_deleteButton {
+  background-color: #D32D27;
+}
+
+#vaultDeleteAccountDialog .actions #DA_deleteButton:disabled {
+  background-color: #BAC0CA;
+}

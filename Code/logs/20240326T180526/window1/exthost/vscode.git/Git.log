@@ -1,0 +1,38 @@
+2024-03-26 18:05:29.279 [info] Log level: Info
+2024-03-26 18:05:29.279 [info] Validating found git in: "git"
+2024-03-26 18:05:29.279 [info] Using git "2.44.0" from "git"
+2024-03-26 18:05:29.279 [info] > git rev-parse --show-toplevel [8ms]
+2024-03-26 18:05:29.279 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-03-26 18:05:29.279 [info] > git rev-parse --show-toplevel [120ms]
+2024-03-26 18:05:29.280 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-03-26 18:05:30.307 [info] > git rev-parse --show-toplevel [3ms]
+2024-03-26 18:05:30.307 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-03-26 18:05:30.395 [info] > git rev-parse --show-toplevel [2ms]
+2024-03-26 18:05:30.395 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-03-26 18:05:30.517 [info] > git rev-parse --show-toplevel [27ms]
+2024-03-26 18:05:30.517 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-03-26 18:05:30.814 [info] > git rev-parse --show-toplevel [2ms]
+2024-03-26 18:05:30.814 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-03-26 18:05:56.284 [info] > git rev-parse --show-toplevel [4ms]
+2024-03-26 18:05:56.284 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-03-26 18:07:10.929 [info] > git rev-parse --show-toplevel [10ms]
+2024-03-26 18:07:10.929 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-03-26 18:08:02.403 [info] > git rev-parse --show-toplevel [3ms]
+2024-03-26 18:08:02.403 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-03-26 18:08:17.104 [info] > git rev-parse --show-toplevel [2ms]
+2024-03-26 18:08:17.104 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-03-26 18:08:29.456 [info] > git rev-parse --show-toplevel [3ms]
+2024-03-26 18:08:29.456 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-03-26 18:10:36.031 [info] > git rev-parse --show-toplevel [3ms]
+2024-03-26 18:10:36.031 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-03-26 18:10:39.582 [info] > git rev-parse --show-toplevel [3ms]
+2024-03-26 18:10:39.582 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-03-26 18:12:00.262 [info] > git rev-parse --show-toplevel [3ms]
+2024-03-26 18:12:00.262 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-03-26 18:12:32.130 [info] > git rev-parse --show-toplevel [3ms]
+2024-03-26 18:12:32.130 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-03-26 18:29:58.195 [warning] Failed to get repository realpath for: "/home/jake/bin/power". Error: ENOENT: no such file or directory, realpath '/home/jake/bin/power'
+2024-03-26 18:43:12.640 [info] > git rev-parse --show-toplevel [2ms]
+2024-03-26 18:43:12.640 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-03-26 18:43:16.253 [info] > git rev-parse --show-toplevel [3ms]
+2024-03-26 18:43:16.253 [info] fatal: not a git repository (or any of the parent directories): .git

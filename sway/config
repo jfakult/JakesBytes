@@ -13,18 +13,20 @@ set $shift Shift
 
 # Home row direction keys, like vim
 set $left h
-set $down n
-set $up t
+set $down t
+set $up n
 set $right s
-
 # Your preferred terminal emulator
 set $term foot
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu_path | wmenu | xargs swaymsg exec --
+set $menu wofi --gtk-dark --prompt "Program" --show drun | xargs swaymsg exec --
 
 ### Output configuration
+
+output eDP-1 scale 1.33
+
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
@@ -68,13 +70,21 @@ input "type:keyboard" {
 	xkb_options grp:shifts_toggle,caps:backspace
 }
 
+input "type:touchpad" {
+	tap enabled
+	natural_scroll enabled
+	drag enabled
+	scroll_factor 1
+	pointer_accel 0.5
+}
+
 ### Key bindings
 #
 # Basics:
 #
     # Start a terminal
     bindsym $mod+Return exec $term
-
+    bindsym $mod+$shift+Return exec $term bash -c "su"
     # Kill focused window
     bindsym $mod+Shift+q kill
 
@@ -211,7 +221,7 @@ bindsym $mod+r mode "resize"
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    position top
+    position bottom
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
@@ -226,3 +236,4 @@ bar {
 
 include /etc/sway/config.d/*
 include keyboard_shortcuts.conf
+include gestures.conf
