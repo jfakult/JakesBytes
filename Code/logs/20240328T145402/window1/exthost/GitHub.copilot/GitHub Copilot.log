@@ -297,3 +297,5 @@
 2024-03-28 15:25:42.262 [info] [fetchCompletions] request.response: [https://copilot-proxy.githubusercontent.com/v1/engines/copilot-codex/completions] took 150 ms
 2024-03-28 15:25:42.263 [info] [streamChoices] solution 0 returned. finish reason: [stop]
 2024-03-28 15:25:42.264 [info] [streamChoices] request done: headerRequestId: [9beb7d17-e69a-4f0e-a14c-53264be4b901] model deployment ID: [ydb69c0d665d6]
+2024-03-28 15:44:05.573 [info] [fetcher] Using Helix fetcher.
+2024-03-28 15:44:05.573 [info] [code-referencing] Public code references are enabled.
