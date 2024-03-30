@@ -25,7 +25,12 @@ set $menu wofi --gtk-dark --prompt "Program" --show drun | xargs swaymsg exec --
 
 ### Output configuration
 
-output eDP-1 scale 1.33
+# To see valid outputs: swaymsg -t get_outputs
+output eDP-1 {
+    scale 1.5
+    #mode 2560x1600@165.000
+    mode 2560x1600@60.002Hz
+}
 
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)

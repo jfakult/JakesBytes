@@ -1,6 +1,0 @@
-2024/03/26-17:50:45.792 428e Creating DB /home/jake/.config/chromium/Profile 1/WebStorage/13/IndexedDB/indexeddb.leveldb since it was missing.
-2024/03/26-17:50:45.795 428e Reusing MANIFEST /home/jake/.config/chromium/Profile 1/WebStorage/13/IndexedDB/indexeddb.leveldb/MANIFEST-000001
-2024/03/26-17:50:55.467 428f Level-0 table #5: started
-2024/03/26-17:50:55.468 428f Level-0 table #5: 480 bytes OK
-2024/03/26-17:50:55.470 428f Delete type=0 #3
-2024/03/26-17:50:55.470 428f Manual compaction at level-0 from (begin) .. (end); will stop at (end)

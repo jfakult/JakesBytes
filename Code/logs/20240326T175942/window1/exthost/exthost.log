@@ -1,6 +1,0 @@
-2024-03-26 17:59:44.632 [info] Extension host with pid 64668 started
-2024-03-26 17:59:44.632 [info] Skipping acquiring lock for /home/jake/.config/Code/User/workspaceStorage/4d96732a3644bf3fa1291c2f462fabd3.
-2024-03-26 17:59:44.804 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
-2024-03-26 17:59:44.870 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
-2024-03-26 17:59:44.879 [info] Extension host terminating: renderer closed the MessagePort
-2024-03-26 17:59:44.880 [info] Extension host with pid 64668 exiting with code 0
