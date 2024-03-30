@@ -18,10 +18,12 @@ Run `setup.sh` to install the system. Assuming that a user with access to `sudo 
 - [Sudoers](https://man.archlinux.org/man/sudoers.5.en)
     - Recommendation is to set something like the following:
 
-    - ```File: /etc/sudoers.d/jake 
+    ```
+    File: /etc/sudoers.d/jake 
     jake ALL=(ALL) /usr/bin/pacman -S *
     jake ALL=(ALL) /usr/bin/pacman -Syu
     jake ALL=(ALL) /usr/bin/pacman -U /home/jake/build/yay* *
     jake ALL=(ALL) /usr/bin/pacman -U --config /etc/pacman.conf -- /home/jake/.cache/yay/* *
     jake ALL=(ALL) /usr/bin/pacman -D *
-    jake ALL=(ALL) /usr/bin/shutdown *```
+    jake ALL=(ALL) /usr/bin/shutdown *
+    ```
