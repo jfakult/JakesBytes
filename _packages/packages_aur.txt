@@ -1,10 +1,17 @@
+glib 1.2.10-18
+glib-debug 1.2.10-18
+gtk 1.2.10-18
+gtk-debug 1.2.10-18
 pam-fprint-grosshack 0.3.0-1
 pam-fprint-grosshack-debug 0.3.0-1
 plzip 1.11-1
 plzip-debug 1.11-1
 powerstat 0.04.03-1
 powerstat-debug 0.04.03-1
+qdirstat 1.9-2
+qdirstat-debug 1.9-2
 visual-studio-code-bin 1.87.2-1
 visual-studio-code-bin-debug 1.87.2-1
+wob-debug 0.15.1-1
 yay 12.3.5-1
 yay-debug 12.3.5-1
