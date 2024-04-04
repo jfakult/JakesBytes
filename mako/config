@@ -1,29 +1,39 @@
 # GLOBAL
 max-history=100
 sort=-time
+default-timeout=5000
 
 # BINDING OPTIONS
 on-button-left=dismiss
 on-button-middle=none
 on-button-right=dismiss-all
 on-touch=dismiss
-on-notify=exec mpv /usr/share/sounds/freedesktop/stereo/message.oga
+#on-notify=exec mpv /usr/share/sounds/freedesktop/stereo/message.oga
 
 # STYLE OPTIONS
 max-visible=5
+background-color=#112233ee
+border-color=#ddccaa77
+border-size=2
+margin=40,40
+padding=10
 
 [urgency=low]
 border-color=#313244
 default-timeout=2000
 
 [urgency=normal]
-border-color=#cba6f7
 default-timeout=5000
 
 [urgency=high]
 border-color=#f38ba8
 text-color=#f38ba8
 default-timeout=0
+
+[app-name="Spotify"]
+background-color=#1D8954
+text-color=#ffffff
+border-color=#1D7954
 
 
 [category=setting_overlay]

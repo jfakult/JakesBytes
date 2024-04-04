@@ -6,6 +6,8 @@
 
 ### Variables
 #
+include $HOME/.config/sway/env
+
 set $mod Mod4
 set $alt Mod1
 set $ctrl Ctrl
@@ -59,12 +61,11 @@ output * {
 # resumed. It will also lock your screen before your computer goes to sleep.
 
 ### Idle configuration
-exec_always --no-startup-id "pkill -f ^wayidle; wayidle -w \
+exec_always --no-startup-id swayidle -w \
           timeout 60 "$HOME/bin/dim.sh" \
           resume 'brightnessctl set $(cat /tmp/last_brightness)' \
           timeout 120 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
           timeout 240 '$HOME/bin/sleep.sh'
-          #timeout 600 '$HOME/bin/lock.sh'"
 
 
 ### Manual Lock
@@ -112,6 +113,7 @@ input "type:touchpad" {
     # Start your launcher
     bindsym $mod+d exec $menu
 
+
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
     # Despite the name, also works for non-floating windows.
@@ -120,7 +122,8 @@ input "type:touchpad" {
     floating_modifier $mod normal
 
     # Reload the configuration file
-    bindsym $mod+Shift+r reload
+    #bindsym $mod+Shift+r reload
+    bindsym $mod+Shift+r exec "$HOME/bin/launch_sway.sh 2>~/log"
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
@@ -255,7 +258,7 @@ bindsym $mod+r mode "resize"
 #    }
 #}
 
-exec_always --no-startup-id "pkill -f ^yambar; yambar"
+exec_always --no-startup-id "yambar"
 
 include /etc/sway/config.d/*
 include keyboard_shortcuts.conf
