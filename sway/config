@@ -59,14 +59,17 @@ output * {
 # resumed. It will also lock your screen before your computer goes to sleep.
 
 ### Idle configuration
-exec_always --no-startup-id swayidle -w \
+exec_always --no-startup-id "pkill -f ^wayidle; wayidle -w \
           timeout 60 "$HOME/bin/dim.sh" \
           resume 'brightnessctl set $(cat /tmp/last_brightness)' \
-          timeout 300 '$/HOME/bin/lock.sh'
+          timeout 120 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+          timeout 240 '$HOME/bin/sleep.sh'
+          #timeout 600 '$HOME/bin/lock.sh'"
 
 
 ### Manual Lock
 bindsym $mod+l exec '$HOME/bin/lock.sh'
+bindsym $alt+Delete exec '$HOME/bin/sleep.sh'
 
 ### Input configuration
 #
@@ -238,20 +241,23 @@ bindsym $mod+r mode "resize"
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
-bar {
-    position bottom
+#bar {
+#    position bottom
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+#    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
 
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
-}
+#    colors {
+#        statusline #ffffff
+#        background #323232
+#        inactive_workspace #32323200 #32323200 #5c5c5c
+#    }
+#}
+
+exec_always --no-startup-id "pkill -f ^yambar; yambar"
 
 include /etc/sway/config.d/*
 include keyboard_shortcuts.conf
 include gestures.conf
+include styles.conf
