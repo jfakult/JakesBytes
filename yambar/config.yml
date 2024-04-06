@@ -1,15 +1,30 @@
 icon: &icon
   font: "HackNerdFont:pixelsize=28"
 
+text_color: &text_color FFD7CFFF
+text_color_dim: &text_color_dim FFC7aFAA
+text_color_error: &text_color_error FF5522FF
+
+# friendly light pink
+mic_color: &mic_color FFB6C1FF
+
+# warm orange
+cpu_color: &cpu_color ED724EFF
+
+# friendly bright purple
+ssid_color: &ssid_color AC94F4FF
+
+# friendly light green
+bitrate_color: &bitrate_color 82C682FF
+
 # fonts we'll be re-using here and there
-awesome: &awesome HackNerdFont:style=solid:pixelsize=14
-awesome_brands: &awesome_brands HackNerdFont:pixelsize=16
+hackfont: &hackfont HackNerdFont:style=solid:pixelsize=28
 
 std_underline: &std_underline {underline: { size: 2, color: FFFFCCFF}}
 
 bar:
   location: bottom
-  height: 44
+  height: 48
   font: hack:size=28
   foreground: FFFFCCFF
   background: 113333FF
@@ -18,15 +33,11 @@ bar:
   left:
     - i3:
         anchors: # Not used (directly) by f00bar; used here to avoid duplication
-          - string: &i3_common {margin: 5, on-click: "swaymsg --quiet workspace {name}"}
+          - string: &i3_common {margin: 8, on-click: "swaymsg --quiet workspace {name}"}
           - string: &default {<<: *i3_common, text: "{name}"}
-          - string: &main    {<<: *i3_common, text: , font: *awesome}
-          - string: &surfing {<<: *i3_common, text: , font: *awesome_brands}
-          - string: &misc    {<<: *i3_common, text: , font: *awesome}
-          - string: &mail    {<<: *i3_common, text: , font: *awesome}
-          - string: &music   {<<: *i3_common, text: , font: *awesome}
           - focused: &focused
               deco: {stack: [background: {color: ffa0a04c}, <<: *std_underline]}
+              text: "{name}"
           - invisible: &invisible {foreground: ffffff55}
           - urgent: &urgent
               foreground: 000000ff
@@ -44,107 +55,43 @@ bar:
           "":
             map:
               conditions:
-                state == focused:   {string: {<<: [*default, *focused]}}
+                state == focused:   {string: {<<: [*focused, *default]}}
                 state == unfocused: {string: {<<: *default}}
-                state == invisible: {string: {<<: [*default, *invisible]}}
-                state == urgent:    {string: {<<: [*default, *urgent]}}
-          main:
-            map:
-              conditions:
-                state == focused:   {string: {<<: [*main, *focused]}}
-                state == unfocused: {string: {<<: *main}}
-                state == invisible: {string: {<<: [*main, *invisible]}}
-                state == urgent:    {string: {<<: [*main, *urgent]}}
-          surfing:
-            map:
-              conditions:
-                state == focused: {string: {<<: [*surfing, *focused]}}
-                state == unfocused: {string: {<<: *surfing}}
-                state == invisible: {string: {<<: [*surfing, *invisible]}}
-                state == urgent:    {string: {<<: [*surfing, *urgent]}}
-          misc:
-            map:
-              conditions:
-                state == focused: {string: {<<: [*misc, *focused]}}
-                state == unfocused: {string: {<<: *misc}}
-                state == invisible: {string: {<<: [*misc, *invisible]}}
-                state == urgent:    {string: {<<: [*misc, *urgent]}}
-
-          mail:
-            map:
-              conditions:
-                state == focused: {string: {<<: [*mail, *focused]}}
-                state == unfocused: {string: {<<: *mail}}
-                state == invisible: {string: {<<: [*mail, *invisible]}}
-                state == urgent:    {string: {<<: [*mail, *urgent]}}
-          music:
-            map:
-              conditions:
-                state == focused: {string: {<<: [*music, *focused]}}
-                state == unfocused: {string: {<<: *music}}
-                state == invisible: {string: {<<: [*music, *invisible]}}
-                state == urgent:    {string: {<<: [*music, *urgent]}}
+                state == invisible: {string: {<<: [*invisible, *default]}}
+                state == urgent:    {string: {<<: [*urgent, *default]}}
 
 
   right:
-    - pulse:
-        foreground: 'AF87FFFF'
+    - pipewire:
+        foreground: *text_color
+        anchors:
+          volume: &volume
+            conditions:
+              type == "sink" && ~muted:
+                - string: {text: "\uF130 ", <<: *icon, foreground: *mic_color}
+                - string: {text: "{cubic_volume}%"}
+              type == "sink" && muted:
+                - string: {text: "\uF131 ", <<: *icon}
+                - string: {text: "{cubic_volume}%", foreground: *text_color_dim}
         content:
-          - map:
+          map:
+            <<: *volume
+    
+    - cpu:
+          poll-interval: 4000
+          content:
+            map:
               conditions:
-                ~source_muted:
-                  - string: {text: "\uF130 ", <<: *icon}
-                  - string: {text: "{sink_percent}%"}
-                source_muted:
-                  - string: {text: "\uF131 ", <<: *icon}
-                  - string: {text: "{sink_percent}%", foreground: 'FF206FFF'}
-    # - script:
-    #     path: /home/anderson/.config/yambar/pulse/pulse
-    #     foreground: 'AF87FFFF'
-    #     content:
-    #       - map:
-    #           conditions:
-    #             source_muted:
-    #               - string: {text: "\uF131", <<: *icon, foreground: 'FF206FFF'}
-    #               - string: {text: "Mic muted ", foreground: 'FF206FFF'}
-    #             ~source_muted:
-    #               - string: {text: "\uF130", <<: *icon}
-    #       - map:
-    #           conditions:
-    #             headset:
-    #               - string: {text: "\uF7CA", <<: *icon}
-    #             ~headset:
-    #               - string: {text: "\uF886", <<: *icon}
-    #       - string: {text: "{volume}%"}
-    - script:
-        path: /home/anderson/.config/yambar/mem.sh
-        foreground: 'BFFF00FF'
+                id < 0:
+                  - string: {text: "\uf4bc", font: *hackfont, foreground: *cpu_color}
+                  - string: {text: " {cpu}%", foreground: *text_color}
+
+    - mem:
+        poll-interval: 4000
         content:
-          map:
-            conditions:
-              high:
-                - string: {text: "{bar}", foreground: 'FF206FFF'}
-                - string: {text: " {value}%", foreground: 'FF206FFF'}
-              ~high:
-                - string: {text: "{bar}"}
-                - string: {text: " {value}%"}
-    - script:
-        path: /home/anderson/.config/yambar/percpu.sh
-        foreground: '5FD7FFFF'
-        content:
-          map:
-            conditions:
-              high:
-                - string: {text: "{bar}", foreground: 'FF206FFF'}
-                - string: {text: " {value}%", foreground: 'FF206FFF'}
-              ~high:
-                - string: {text: "{bar}"}
-                - string: {text: " {value}%"}
-    - script:
-        path: /home/anderson/.config/yambar/temp.sh
-        foreground: '5FD7FFFF'
-        content:
-          - string: {text: "{temp}\u00B0C"}
+          - string: {text: "\uEE02", foreground: *cpu_color}
+          - string: {text: " {used:mb}MB", foreground: *text_color}
+                
     - removables:
         content:
           map:
@@ -153,37 +100,24 @@ bar:
                 string:
                   on-click: sh -c 'notify-send "{device}" "`udisksctl mount -b {device}`"'
                   text: "\uF0C7 {label}"
-                  foreground: FFD787FF
+                  foreground: *text_color
               ~mounted:
                 string:
                   on-click: sh -c 'notify-send "{device}" "`udisksctl unmount -b {device}`"'
                   text: "\uF62B {label}"
-                  foreground: BFFF00FF
+                  foreground: *text_color_dim
                   # deco: {underline: {size: 1, color: BFFF00FF}}
-    # - script:
-    #     path: /home/anderson/.config/yambar/networkmanager/networkmanager
-    #     content:
-    #       - map:
-    #           conditions:
-    #             state == disconnected:
-    #               - string: {text: "\uF4AD", <<: *icon, foreground: "FF005FFF"}
-    #               - string: {text: " offline", foreground: "FF005FFF"}
-    #             state == changing:
-    #               - string: {text: "\uF254", <<: *icon, foreground: "5FD7FFFF"}
-    #               - string: {text: " {network}", foreground: "5FD7FFFF"}
-    #             state == connected:
-    #               - string: {text: "\U000F08FA", <<: *icon, foreground: "5FD7FFFF"}
-    #               - string: {text: " {network}", foreground: "5FD7FFFF"}
+                  
     - network:
         name: wlan0
+        poll-interval: 5000
         content:
           - map:
               conditions:
                 state == down:
-                  - string: {text: "\uF4AD", <<: *icon, foreground: "FF005FFF"}
-                  - string: {text: " offline", foreground: "FF005FFF"}
+                  - string: {text: "\uF4AD", <<: *icon, foreground: *ssid_color}
+                  - string: {text: " offline", foreground: *text_color_dim}
                 state == up:
-                  # - string: {text: "\U000F08FA", <<: *icon, foreground: "5FD7FFFF"}
                   - ramp:
                       tag: signal
                       min: -90
@@ -194,70 +128,52 @@ bar:
                         # - string: {text: "\U000F0922", foreground: "5FD7FFFF"}
                         # - string: {text: "\U000F091F", foreground: "5FD7FFFF"}
                         # - string: {text: "\U000F092F", foreground: "5FD7FFFF"}
-                        - string: {text: "\U000F08FE", foreground: "5FD7FFFF", <<: *icon}
-                        - string: {text: "\U000F08F4", foreground: "5FD7FFFF", <<: *icon}
-                        - string: {text: "\U000F08F6", foreground: "5FD7FFFF", <<: *icon}
-                        - string: {text: "\U000F08F8", foreground: "5FD7FFFF", <<: *icon}
-                        - string: {text: "\U000F08FA", foreground: "5FD7FFFF", <<: *icon}
-                  - string: {text: " {ssid}", foreground: "5FD7FFFF"}
+                        - string: {text: "\U000F08FE", foreground: *ssid_color, <<: *icon}
+                        - string: {text: "\U000F08F4", foreground: *ssid_color, <<: *icon}
+                        - string: {text: "\U000F08F6", foreground: *ssid_color, <<: *icon}
+                        - string: {text: "\U000F08F8", foreground: *ssid_color, <<: *icon}
+                        - string: {text: "\U000F08FA", foreground: *ssid_color, <<: *icon}
+                  - string: {text: " {ssid}", foreground: *text_color}
                 default:
-                  - string: {text: "\uF254", <<: *icon, foreground: "5FD7FFFF"}
-                  - string: {text: " {ssid}", foreground: "5FD7FFFF"}
+                  - string: {text: "\uF254", <<: *icon, foreground: *ssid_color}
+                  - string: {text: " {ssid}", foreground: *text_color}
 
-    # - network:
-    #     name: 'wlan0'
-    #     content:
-    #       # - map:
-    #       #     tag: state
-    #       #     default:
-    #       #       string: {text: 'connecting'}
-    #       #     values:
-    #       #       up:
-    #       #         string: {text: 'up'}
-    #       #       down:
-    #       #         string: {text: 'down'}
-    #       - map:
-    #           tag: carrier
-    #           values:
-    #             true:
-    #               - map:
-    #                   tag: state
-    #                   default:
-    #                     string: {text: "\uF6D7 {ssid}"}
-    #                   values:
-    #                     up:
-    #                       string: {text: "\uFAA8 {ssid}"}
-    #             false:
-    #               - string: {text: "\uF818 offline"}
+    # Show ipv4 address (or ipv6 if no ipv4)
+    - network:
+        name: wlan0
+        poll-interval: 30000
+        content:
+          - map:
+              conditions:
+                state == up:
+                  - string: {text: "({ipv4})", foreground: *text_color}
+                default:
+                  - string: {text: "({ipv6})", foreground: *text_color}
+
+    # Show upload and download speed
+    - network:
+        name: wlan0
+        poll-interval: 4000
+        content:
+          - map:
+              conditions:
+                state == up:
+                  - string: {text: " \uF093", foreground: *bitrate_color}
+                  - string: {text: " {dl-speed:mb}", foreground: *text_color}
+                  - string: {text: " \uF019", foreground: *bitrate_color}
+                  - string: {text: " {ul-speed:mb}", foreground: *text_color}
+                default:
+                  - string: {text: " \uF093", foreground: *bitrate_color}
+                  - string: {text: " 0", foreground: *text_color}
+                  - string: {text: " \uF019", foreground: *bitrate_color}
+                  - string: {text: " 0", foreground: *text_color}
+
     - clock:
         foreground: FFD787FF
-        time-format: "%a %d %b %H:%M"
+        time-format: "%a %b %d, %H:%M"
         content:
-          - string: {text: "{time}"}
-    # - cpu:
-    #      poll-interval: 250
-    #      foreground: '5FD7FFFF'
-    #      anchors:
-    #        id_all: &id_all
-    #                  tag: cpu
-    #                  items:
-    #                    - string: {text: '、　'}
-    #                    - string: {text: '。　'}
-    #                    - string: {text: '〃　'}
-    #                    - string: {text: '〄　'}
-    #                    - string: {text: '々　'}
-    #                    - string: {text: '〆　'}
-    #                    - string: {text: '〇　'}
-    #                    - string: {text: '〈　'}
-    #      content:
-    #        - map:
-    #            conditions:
-    #              id == 4 || id == 8 || id == 12:
-    #                - string: {text: " "}
-    #                - ramp: *id_all
-    #              id >= 0:
-    #                - ramp: *id_all
-
+          - string: {text: "{time}", foreground: *text_color}
+          
     - battery:
         name: BAT1
         poll-interval: 10000
@@ -267,6 +183,8 @@ bar:
               items:
                 - ramp:
                     tag: capacity
+                    min: 0
+                    max: 90
                     items:
                       - string: {text: ' ', foreground: ff0000ff, <<: *icon}
                       - string: {text: ' ', foreground: ffa600ff, <<: *icon}
@@ -275,10 +193,9 @@ bar:
                       - string: {text: ' ', <<: *icon}
                       - string: {text: ' ', <<: *icon}
                       - string: {text: ' ', <<: *icon}
-                      - string: {text: ' ', <<: *icon}
-                      - string: {text: ' ', <<: *icon}
                       - string: {text: ' ', foreground: bfff00ff, <<: *icon}
-                - string: {text: " {capacity}%"}
+                      - string: {text: ' ', foreground: bfff00ff, <<: *icon}
+                - string: {text: "{capacity}%", foreground: *text_color}
         content:
           map:
             conditions:
@@ -288,8 +205,8 @@ bar:
                 <<: *discharging
               state == charging: &charging
                 - string: {text: '', foreground: bfff00ff, <<: *icon}
-                - string: {text: " {capacity}%"}
+                - string: {text: "{capacity}%"}
               state == full:
-                - string: {text: ' ', foreground: bfff00ff, <<: *icon}
-                - string: {text: " {capacity}%"}
+                - string: {text: '', foreground: bfff00ff, <<: *icon}
+                - string: {text: "{capacity}%"}
               state == "not charging": *charging
