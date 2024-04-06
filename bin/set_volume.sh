@@ -6,9 +6,10 @@ iDIR="$HOME/.config/mako/icons"
 
 # Get Volume
 get_volume() {
-	volume=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -Po '\d+(?=%)' | head -n 1)
-	mute=$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $NF}')
-	if [[ "$mute" == "yes" ]]; then
+	# alsa_output.pci-0000_c1_00.6.analog-stereo1
+	volume=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2*100}')
+	mute=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -o MUTED)
+	if [[ "$mute" == "MUTED" ]]; then
 		echo "0"
 	else
 		echo "$volume"
@@ -54,16 +55,18 @@ notify_mic_user() {
 
 if [ "$2" == "mic" ]; then
 	if [ "$1" == "mute" ]; then
-		pactl set-source-mute @DEFAULT_SOURCE@ toggle && notify_mic_user
+		wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle && notify_mic_user
 	else
-		pactl set-source-volume @DEFAULT_SOURCE@ "$1" && notify_mic_user
+		wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 0
+		wpctl set-volume @DEFAULT_AUDIO_SOURCE@ "$1" && notify_mic_user
 	fi
 elif [ "$1" == "mute" ]; then
-	pactl set-sink-mute @DEFAULT_SINK@ toggle && notify_user
+	wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && notify_user
 else
-	pactl set-sink-volume @DEFAULT_SINK@ "$1"
+	wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
+	wpctl set-volume @DEFAULT_AUDIO_SINK@ -- "$1"
 	if [ "$(get_volume)" -gt "150" ]; then
-		pactl set-sink-volume @DEFAULT_SINK@ 150%
+		wpctl set-volume @DEFAULT_AUDIO_SINK@ 150%
 	fi
 	notify_user
 fi
