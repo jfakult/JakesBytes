@@ -1,9 +1,12 @@
 iwgtk 0.9-1
+nordvpn-bin 3.17.4-1
 pam-fprint-grosshack 0.3.0-1
 pam_ssh 2.3-3
 plzip 1.11-1
 powerstat 0.04.03-1
 qdirstat 1.9-2
+sway-audio-idle-inhibit-git 0.1.1.r43.8ac8608-1
+sway-audio-idle-inhibit-git-debug 0.1.1.r43.8ac8608-1
 visual-studio-code-bin 1.88.0-1
 yambar 1.10.0-1
 yay 12.3.5-1

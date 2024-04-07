@@ -14,5 +14,6 @@ if [ -z "$sway_sock" ]; then
 else
     pkill -f ^swayidle
     pkill -f ^yambar
+    pkill -f sway-audio-idle-inhibit
     swaymsg -s $sway_sock reload
 fi

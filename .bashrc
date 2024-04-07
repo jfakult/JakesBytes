@@ -5,6 +5,15 @@
 alias s="$HOME/bin/launch_sway.sh"
 alias shut="shutdown now"
 alias wifi="(sudo -E iwgtk >/dev/null 2>/dev/null &)"
+alias nordstart="sudo systemctl start nordvpnd && nordvpn connect"
+
+function nordstop() {
+	pkill -f nordvpn
+	pkill -f nordlynx 2>/dev/null
+	nordvpn disconnect
+	sudo systemctl stop nordvpnd
+}
+
 
 export PATH=~/bin:$PATH
 export XDG_CURRENT_DESKTOP=sway
@@ -18,7 +27,9 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
 export PS1='[\u@\h $(echo $(dirname \w)|sed -e "s;\(/.\)[^/]*;\1;g")/$(basename \w)]\$ '
-
+export NNN_FIFO=/tmp/nnn.fifo
+export NNN_PLUG="i:preview-tui"
+export NNN_TERMINAL=kitty
 function open() {
 	# Wrap in parentheses to avoid seeing background task output
 	(xdg-open "$@" >/dev/null &)
