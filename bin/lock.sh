@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export XDG_CURRENT_DESKTOP=sway
-source ~/.config/colors.sh
+source ~/.config/system_styles.sh
 
 # FROM: https://github.com/RedBorg/dotfiles-sway-island/blob/master/.config/swaylock/lock.sh
 
@@ -32,11 +32,11 @@ if [ "$lock_icon" = "icons/lock_icon.png" ]
 then
   image_diameter=400
   ffmpeg -i $lock_icon -vf scale=$image_diameter:$image_diameter icons/resized_lock_icon.png
-  ffmpeg -i screen.jpg -i icons/resized_lock_icon.png -filter_complex "[0:v]curves=all='0/0 0.5/0.25 1/0.25'[adjusted];[adjusted]gblur=sigma=10[blurred];[blurred][1:v]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2[out]" -map "[out]" logo-ed_screen.png
+  ffmpeg -i screen.jpg -i icons/resized_lock_icon.png -filter_complex "[0:v]curves=all='0/0 0.5/0.25 1/0.25'[adjusted];[adjusted]gblur=sigma=10[blurred];[blurred][1:v]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2[out]" -map "[out]" logo-ed_screen.png &
   
   ffmpeg -i $unlock_icon -vf scale=$image_diameter:$image_diameter icons/resized_unlock_icon.png
-  #ffmpeg -i screen.jpg -i icons/resized_unlock_icon.png -filter_complex "[0:v]curves=all='0/0 0.5/0.2 1/0.25'[adjusted];[adjusted]gblur=sigma=5[blurred];[blurred][1:v]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2[out]" -map "[out]" logo-ed_screen_unlocked.png
-  ffmpeg -i screen.jpg -i icons/resized_unlock_icon.png -filter_complex "[0:v]curves=all='0/0 0.5/0.25 1/0.25'[adjusted];[adjusted]gblur=sigma=10[blurred];[blurred][1:v]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2[out]" -map "[out]" logo-ed_screen_unlocked.png
+  #ffmpeg -i screen.jpg -i icons/resized_unlock_icon.png -filter_complex "[0:v]curves=all='0/0 0.5/0.2 1/0.25'[adjusted];[adjusted]gblur=sigma=5[blurred];[blurred][1:v]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2[out]" -map "[out]" logo-ed_screen_unlocked.png &
+  ffmpeg -i screen.jpg -i icons/resized_unlock_icon.png -filter_complex "[0:v]curves=all='0/0 0.5/0.25 1/0.25'[adjusted];[adjusted]gblur=sigma=10[blurred];[blurred][1:v]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2[out]" -map "[out]" logo-ed_screen_unlocked.png &
 else
   image_radius=255
   image_diameter=$((2*image_radius))
@@ -58,6 +58,10 @@ ring_color=FF8C44FF
 
 # Open the unlocked logo soon after swaylock launches
 $(sleep 0.5 && imv -f logo-ed_screen_unlocked.png) &
+
+# Sleep until logo-ed_screen.png is created
+# Becuse we run our ffmpeg commands in the background
+while [ ! -f logo-ed_screen.png ]; do sleep 0.1; done
 
 swaylock \
   --image logo-ed_screen.png \

@@ -1,8 +1,9 @@
 icon: &icon
   font: "HackNerdFont:pixelsize=28"
 
-text_color: &text_color FFD7CFFF
-text_color_dim: &text_color_dim FFC7aFAA
+background_color: &background_color 114444FF
+text_color: &text_color FFFFEEFF
+text_color_dim: &text_color_dim 99BB99FF
 text_color_error: &text_color_error FF5522FF
 
 # friendly light pink
@@ -25,9 +26,8 @@ std_underline: &std_underline {underline: { size: 2, color: FFFFCCFF}}
 bar:
   location: bottom
   height: 48
-  font: hack:size=28
-  foreground: FFFFCCFF
-  background: 113333FF
+  font: *hackfont
+  background: *background_color
   spacing: 20
 
   left:
@@ -68,11 +68,11 @@ bar:
           volume: &volume
             conditions:
               type == "sink" && ~muted:
-                - string: {text: "\uF130 ", <<: *icon, foreground: *mic_color}
-                - string: {text: "{cubic_volume}%"}
+                - string: {text: "\uF130 ", <<: *icon, foreground: *mic_color, on-click: "set_volume.sh mute"}
+                - string: {text: "{cubic_volume}%", on-click: "set_volume.sh mute"}
               type == "sink" && muted:
-                - string: {text: "\uF131 ", <<: *icon}
-                - string: {text: "{cubic_volume}%", foreground: *text_color_dim}
+                - string: {text: "\uF131 ", <<: *icon, on-click: "set_volume.sh mute"}
+                - string: {text: "{cubic_volume}%", foreground: *text_color_dim, on-click: "set_volume.sh mute"}
         content:
           map:
             <<: *volume
@@ -115,8 +115,8 @@ bar:
           - map:
               conditions:
                 state == down:
-                  - string: {text: "\uF4AD", <<: *icon, foreground: *ssid_color}
-                  - string: {text: " offline", foreground: *text_color_dim}
+                  - string: {text: "\uF4AD", <<: *icon, foreground: *ssid_color, on-click: "/home/jake/bin/wifi.sh"}
+                  - string: {text: " offline", foreground: *text_color_dim, on-click: "/home/jake/bin/wifi.sh"}
                 state == up:
                   - ramp:
                       tag: signal
@@ -128,15 +128,15 @@ bar:
                         # - string: {text: "\U000F0922", foreground: "5FD7FFFF"}
                         # - string: {text: "\U000F091F", foreground: "5FD7FFFF"}
                         # - string: {text: "\U000F092F", foreground: "5FD7FFFF"}
-                        - string: {text: "\U000F08FE", foreground: *ssid_color, <<: *icon}
-                        - string: {text: "\U000F08F4", foreground: *ssid_color, <<: *icon}
-                        - string: {text: "\U000F08F6", foreground: *ssid_color, <<: *icon}
-                        - string: {text: "\U000F08F8", foreground: *ssid_color, <<: *icon}
-                        - string: {text: "\U000F08FA", foreground: *ssid_color, <<: *icon}
-                  - string: {text: " {ssid}", foreground: *text_color}
+                        - string: {text: "\U000F08FE", foreground: *ssid_color, <<: *icon, on-click: "/home/jake/bin/wifi.sh"}
+                        - string: {text: "\U000F08F4", foreground: *ssid_color, <<: *icon, on-click: "/home/jake/bin/wifi.sh"}
+                        - string: {text: "\U000F08F6", foreground: *ssid_color, <<: *icon, on-click: "/home/jake/bin/wifi.sh"}
+                        - string: {text: "\U000F08F8", foreground: *ssid_color, <<: *icon, on-click: "/home/jake/bin/wifi.sh"}
+                        - string: {text: "\U000F08FA", foreground: *ssid_color, <<: *icon, on-click: "/home/jake/bin/wifi.sh"}
+                  - string: {text: " {ssid}", foreground: *text_color, on-click: "/home/jake/bin/wifi.sh"}
                 default:
-                  - string: {text: "\uF254", <<: *icon, foreground: *ssid_color}
-                  - string: {text: " {ssid}", foreground: *text_color}
+                  - string: {text: "\uF254", <<: *icon, foreground: *ssid_color, on-click: "/home/jake/bin/wifi.sh"}
+                  - string: {text: " {ssid}", foreground: *text_color, on-click: "/home/jake/bin/wifi.sh"}
 
     # Show ipv4 address (or ipv6 if no ipv4)
     - network:
@@ -146,9 +146,9 @@ bar:
           - map:
               conditions:
                 state == up:
-                  - string: {text: "({ipv4})", foreground: *text_color}
+                  - string: {text: "({ipv4})", foreground: *text_color, on-click: "/home/jake/bin/wifi.sh"}
                 default:
-                  - string: {text: "({ipv6})", foreground: *text_color}
+                  - string: {text: "({ipv6})", foreground: *text_color, on-click: "/home/jake/bin/wifi.sh"}
 
     # Show upload and download speed
     - network:
@@ -172,7 +172,7 @@ bar:
         foreground: FFD787FF
         time-format: "%a %b %d, %H:%M"
         content:
-          - string: {text: "{time}", foreground: *text_color}
+          - string: {text: "{time}", foreground: *text_color, on-click: "galendae"}
           
     - battery:
         name: BAT1
@@ -186,16 +186,16 @@ bar:
                     min: 0
                     max: 90
                     items:
-                      - string: {text: ' ', foreground: ff0000ff, <<: *icon}
-                      - string: {text: ' ', foreground: ffa600ff, <<: *icon}
-                      - string: {text: ' ', <<: *icon}
-                      - string: {text: ' ', <<: *icon}
-                      - string: {text: ' ', <<: *icon}
-                      - string: {text: ' ', <<: *icon}
-                      - string: {text: ' ', <<: *icon}
-                      - string: {text: ' ', foreground: bfff00ff, <<: *icon}
-                      - string: {text: ' ', foreground: bfff00ff, <<: *icon}
-                - string: {text: "{capacity}%", foreground: *text_color}
+                      - string: {text: ' ', foreground: ff0000ff, <<: *icon, on-click: "~/bin/power/set_power_profile.sh"}
+                      - string: {text: ' ', foreground: ffa600ff, <<: *icon, on-click: "~/bin/power/set_power_profile.sh"}
+                      - string: {text: ' ', <<: *icon, on-click: "~/bin/power/set_power_profile.sh"}
+                      - string: {text: ' ', <<: *icon, on-click: "~/bin/power/set_power_profile.sh"}
+                      - string: {text: ' ', <<: *icon, on-click: "~/bin/power/set_power_profile.sh"}
+                      - string: {text: ' ', <<: *icon, on-click: "~/bin/power/set_power_profile.sh"}
+                      - string: {text: ' ', <<: *icon, on-click: "~/bin/power/set_power_profile.sh"}
+                      - string: {text: ' ', foreground: bfff00ff, <<: *icon, on-click: "~/bin/power/set_power_profile.sh"}
+                      - string: {text: ' ', foreground: bfff00ff, <<: *icon, on-click: "~/bin/power/set_power_profile.sh"}
+                - string: {text: "{capacity}%", foreground: *text_color, on-click: "~/bin/power/set_power_profile.sh"}
         content:
           map:
             conditions:

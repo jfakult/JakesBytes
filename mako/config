@@ -2,6 +2,7 @@
 max-history=100
 sort=-time
 default-timeout=5000
+font="Fantasque Sans Mono", 12
 
 # BINDING OPTIONS
 on-button-left=dismiss
@@ -17,6 +18,7 @@ border-color=#ddccaa77
 border-size=2
 margin=40,40
 padding=10
+markup=1
 
 [urgency=low]
 border-color=#313244
@@ -37,7 +39,6 @@ border-color=#1D7954
 
 
 [category=setting_overlay]
-font="Fantasque Sans Mono", 12
 width=256
 height=48
 margin=10,10,40,10
@@ -47,7 +48,6 @@ border-radius=10
 icons=1
 max-icon-size=32
 icon-location=left
-markup=1
 actions=1
 history=1
 text-alignment=center
@@ -59,6 +59,18 @@ background-color=#1e1e2eaa
 text-color=#ddddff
 border-color=#cba6f7
 progress-color=over #b9b4caaa
+
+[category=toggle]
+font=Hack 16
+# Mako trims the height to the content
+height=1500
+# The script generating the notification uses pango to markup the background
+background-color=#00000000
+border-color=#00000000
+margin=40,0
+padding=0
+default-timeout=1500
+anchor=bottom-right
 
 [category=mpd]
 border-color=#f9e2af

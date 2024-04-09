@@ -89,11 +89,15 @@ bindsym $alt+Delete exec '$HOME/bin/sleep.sh'
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 
+# #grp:shifts_toggle,
 input "type:keyboard" {
 	xkb_layout us,us
 	xkb_variant dvorak,
 	xkb_options grp:shifts_toggle,caps:backspace
 }
+
+
+# See keyboard_shortcuts.conf for layout toggling
 
 input "type:touchpad" {
 	tap enabled
@@ -109,7 +113,7 @@ input "type:touchpad" {
 #
     # Start a terminal
     bindsym $mod+Return exec $term
-    bindsym $mod+$shift+Return exec $term bash -c "su"
+    bindsym $mod+$shift+Return exec $term bash -c "echo 'Root login:';su"
     # Kill focused window
     bindsym $mod+Shift+q kill
 

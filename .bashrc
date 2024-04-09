@@ -4,8 +4,8 @@
 
 alias s="$HOME/bin/launch_sway.sh"
 alias shut="shutdown now"
-alias wifi="(sudo -E iwgtk >/dev/null 2>/dev/null &)"
 alias nordstart="sudo systemctl start nordvpnd && nordvpn connect"
+alias wifi="wifi.sh"
 
 function nordstop() {
 	pkill -f nordvpn
@@ -18,7 +18,7 @@ function nordstop() {
 export PATH=~/bin:$PATH
 export XDG_CURRENT_DESKTOP=sway
 
-source ~/.config/colors.sh
+source ~/.config/system_styles.sh
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
