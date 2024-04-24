@@ -106,7 +106,7 @@ for layout_variant in "${layouts[@]}"; do
     line-height='3'>$friendly_name</span>\n"
 done
 
-echo "$notification_message"
+#echo "$notification_message"
 
 # Send the notification
 notify-send " " "$notification_message" --category=toggle -h string:x-dunst-stack-tag:toggle

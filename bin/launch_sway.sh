@@ -29,7 +29,7 @@ sway_sock=$(sway --get-socketpath)
 
 if [ -z "$sway_sock" ]; then
     #WLR_DRM_DEVICES=/dev/dri/card0:/dev/dri/card1
-    sway
+    sway &
 else
     pkill -f ^swayidle
     pkill -f ^yambar

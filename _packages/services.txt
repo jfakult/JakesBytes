@@ -1,4 +1,5 @@
 bluetooth.service
+docker.service
 iwd.service
 power-profiles-daemon.service
 seatd.service

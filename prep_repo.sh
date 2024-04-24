@@ -12,4 +12,5 @@ systemctl list-unit-files | awk '{print $1"\t\t\t\t\t"$2}' | grep "enabled$" | g
 cd ~/.config
 echo "Saving bashrc and bin scripts"
 cp ~/.bashrc .
+cp ~/.zshrc .
 cp -r ~/bin .
