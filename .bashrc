@@ -1,7 +1,13 @@
+#################
+##     NOTE    ##
+## Use .zshrc! ##
+#################
+
 #
 # ~/.bashrc
 #
 
+alias automount="systemctl start udiskie --user"
 alias s="$HOME/bin/launch_sway.sh"
 alias shut="shutdown now"
 alias nordstart="sudo systemctl start nordvpnd && nordvpn connect"
@@ -18,6 +24,8 @@ function nordstop() {
 
 export PATH=~/bin:$PATH
 export XDG_CURRENT_DESKTOP=sway
+export LD_LIBRARY_PATH=/usr/lib:$LD_LIBRARY_PATH
+
 
 source ~/.config/system_styles.sh
 
@@ -26,6 +34,7 @@ source ~/.config/system_styles.sh
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
+alias apps='wofi --gtk-dark --prompt "Program" --show drun'
 
 export PS1='[\u@\h $(echo $(dirname \w)|sed -e "s;\(/.\)[^/]*;\1;g")/$(basename \w)]\$ '
 export NNN_FIFO=/tmp/nnn.fifo

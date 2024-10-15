@@ -19,6 +19,12 @@ if [ "$EUID" -eq 0 ] && [ ! -f /tmp/booted_root ]; then
     touch /tmp/booted_root
 fi
 
+# if root and we have run this
+if [ "$EUID" -eq 0 ] && [ -f /tmp/booted_root ]; then
+    echo "Updating system..."
+    pacman -Syyu --noconfirm
+fi
+
 # If /tmp/booted exists, then the system has already been updated
 if [ ! -f /tmp/booted ]; then
     read -p "Fresh boot detected, update **user** system? [Y/n] " -n 1 -r
@@ -28,5 +34,5 @@ if [ ! -f /tmp/booted ]; then
         exit 0
     fi
     echo "Updating system..."
-    yay -Syyu && touch /tmp/booted && chown jake:jake /tmp/booted
+    yay -Syyu --noconfirm --answerdiff=None --answeredit=None && touch /tmp/booted && chown jake:jake /tmp/booted
 fi

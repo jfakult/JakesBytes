@@ -21,6 +21,9 @@
 # localectl list-x11-keymap-layouts - gives you layouts (~100 on modern systems)
 # localectl list-x11-keymap-variants [layout] gives you variants for this layout (or all variants if no layout specified, ~300 on modern systems)
 # localectl list-x11-keymap-options | grep grp:
+
+source ~/.config/system_styles.sh
+
 layouts=("us:''" "us:dvorak")
 
 # Retrieve the current layout and variant combination
@@ -62,7 +65,6 @@ next_variant=${next_layout_variant#*:}
 swaymsg input type:keyboard xkb_layout "$next_layout"
 swaymsg input type:keyboard xkb_variant "$next_variant"
 
-source ~/.config/system_styles.sh
 # Build the notification message
 notification_message=""
 for layout_variant in "${layouts[@]}"; do
