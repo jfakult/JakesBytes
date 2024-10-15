@@ -71,7 +71,7 @@ bar:
                 - string: {text: "\uF130 ", <<: *icon, foreground: *mic_color, on-click: { left: "~/bin/set_volume.sh mute", wheel-down: "~/bin/set_volume.sh 1%+", wheel-up: "~/bin/set_volume.sh 1%-" }}
                 - string: {text: "{cubic_volume}%", on-click: { left: "~/bin/set_volume.sh mute", wheel-down: "~/bin/set_volume.sh 1%+", wheel-up: "~/bin/set_volume.sh 1%-"}}
               type == "sink" && muted:
-                - string: {text: "\uF131 ", <<: *icon, on-click: { left: "~/bin/set_volume.sh mute", wheel-down: "~/bin/set_volume.sh 1%+", wheel-up: "~/bin/set_volume.sh 1%-" }}
+                - string: {text: "\uF131  ", <<: *icon, foreground: *text_color_dim, on-click: { left: "~/bin/set_volume.sh mute", wheel-down: "~/bin/set_volume.sh 1%+", wheel-up: "~/bin/set_volume.sh 1%-" }}
                 - string: {text: "{cubic_volume}%", foreground: *text_color_dim, on-click: { left: "~/bin/set_volume.sh mute", wheel-down: "~/bin/set_volume.sh 1%+", wheel-up: "~/bin/set_volume.sh 1%-"}}
         content:
           map:
@@ -116,7 +116,8 @@ bar:
                 name == wlan0:
                   map:
                     conditions:
-                      state == down:
+                    # unknown, not present, down, lower layers down, testing, dormant
+                      state == down || state == unknown || state == not-present || state == lower-layer-down || state == testing || state == dormant:
                         - string: {text: "\uF4AD", <<: *icon, foreground: *ssid_color, on-click: "~/bin/wifi.sh"}
                         - string: {text: " offline", foreground: *text_color_dim, on-click: "~/bin/wifi.sh"}
                       state == up:

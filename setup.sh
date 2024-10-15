@@ -42,6 +42,14 @@ do
     sudo systemctl enable $line --now
 done
 
+# Enable custom services
+cp _custom_services/* ~/.config/systemd/user/
+mkdir -p systemd/user/multi-user.target.wants
+for file in _custom_services/*.service
+do
+    systemctl enable $(basename $file) --now --user
+done
+
 
 # Install executables
 prompt_or_quit "Install executables?"

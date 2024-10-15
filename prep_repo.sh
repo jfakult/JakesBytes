@@ -1,3 +1,5 @@
+# Or use backup_jake_os.sh
+
 cd ~/.config
 mkdir -p _packages
 cd _packages
