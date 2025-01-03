@@ -1,5 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<FileZilla3 version="3.67.1" platform="*nix">
+<?xml version="1.0"?>
+<FileZilla3 version="3.68.1" platform="*nix">
+	<Bookmark>
+		<Name>Plex</Name>
+		<LocalDir>/home/jake/Downloads</LocalDir>
+		<RemoteDir>1 0 3 usr 3 lib 15 plexmediaserver 5 media 9 extension</RemoteDir>
+	</Bookmark>
 	<Bookmark>
 		<Name>wildstream</Name>
 		<LocalDir>/home/jake/</LocalDir>

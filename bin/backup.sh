@@ -54,6 +54,7 @@ backupFolder="framework"
 # The remote server to backup to
 # You will probably need to manually create some folders for the first backup
 server="root@10.0.0.200"
+#server="butlah@fakult.net"
 serverPort="2222"
 
 # THE UUID of the drive you want to backup to

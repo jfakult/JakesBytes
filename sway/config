@@ -39,7 +39,8 @@ output eDP-1 {
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * {
     #swaymsg "output * power off"' resume 'swaymsg "output * power on"
-    bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+    #bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+    bg ~/Documents/Images/Wallpapers/city2-upscaled.jpeg fill
 }
 #
 # Example configuration:
@@ -64,16 +65,11 @@ output * {
 ### Idle configuration
 exec_always --no-startup-id swayidle -w \
           timeout 120 "$HOME/bin/dim.sh" resume 'brightnessctl set $(cat /tmp/last_brightness)' \
-          timeout 180 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-          timeout 600 '$HOME/bin/sleep.sh'
+          timeout 1200 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+          timeout 1800 '$HOME/bin/sleep.sh'
 
 # Since swayidle doesn't listen for audio output
 exec_always --no-startup-id sway-audio-idle-inhibit
-
-
-### Manual Lock
-bindsym $mod+l exec '$HOME/bin/lock.sh'
-bindsym $alt+Delete exec '$HOME/bin/sleep.sh'
 
 ### Input configuration
 #
@@ -97,12 +93,13 @@ input "type:keyboard" {
 }
 
 # See keyboard_shortcuts.conf for layout toggling
+# Touchpad / mouse / scroll settings
 input "type:touchpad" {
 	tap enabled
 	natural_scroll enabled
 	drag enabled
 	scroll_factor 1
-	pointer_accel 0.4
+	pointer_accel 0.8
     dwt enabled
 }
 

@@ -72,6 +72,19 @@ padding=0
 default-timeout=1500
 anchor=bottom-right
 
+[category=toggle_wide]
+font=Hack 16
+# Mako trims the height to the content
+height=1500
+# The script generating the notification uses pango to markup the background
+background-color=#00000000
+border-color=#00000000
+margin=40,0
+padding=0
+default-timeout=1500
+anchor=bottom-right
+width=600
+
 [category=screenshot]
 margin=10,10,20,10
 padding=8

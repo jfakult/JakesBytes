@@ -8,6 +8,8 @@ Description=Handle automounting of usb devices
 Type=simple
 ExecStart=/usr/bin/udiskie
 ExecStop=/usr/bin/pkill -f udiskie
+Restart=on-failure
+RestartSec=5s
 
 [Install]
 WantedBy=multi-user.target

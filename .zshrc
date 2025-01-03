@@ -16,15 +16,34 @@ export ZSH_PLUGINS="/usr/share/zsh/plugins"
 alias automount="systemctl start udiskie --user"
 alias s="$HOME/bin/launch_sway.sh"
 alias shut="shutdown now"
-alias nordstart="sudo systemctl start nordvpnd && nordvpn connect"
+alias nordstart="sudo systemctl enable --now nordvpnd && nordvpn connect"
 alias wifi="wifi.sh"
 alias record="pw-record -P '{ stream.capture.sink=true }'"
+alias less="less -R"
+alias hello="echo Hi!"
+alias whoa="That was crazy"
+
+function android() {
+	if [ -z "$1" ]; then
+		echo "Usage: android <command>"
+		return
+	elif [ "$1" = "start" ]; then
+		waydroid session start &
+		waydroid show-full-ui
+	elif [ "$1" = "stop" ]; then
+		pkill -f waydroid 2>/dev/null
+	else
+		echo "Usage: android <start|stop|restart>"
+	fi
+}
 
 function nordstop() {
+	nordvpn disconnect
+	sleep 2
 	pkill -f nordvpn
 	pkill -f nordlynx 2>/dev/null
-	nordvpn disconnect
-	sudo systemctl stop nordvpnd
+	#sudo systemctl stop nordvpnd
+	#sudo systemctl stop nordvpn
 }
 
 export PATH=~/bin:$PATH
@@ -75,5 +94,7 @@ source $HOME/.config/zsh-syntax-highlighting/zsh-syntax-highlighting.sh
 for plugin in "${ZSH_PLUGINS_LIST[@]}"; do
 	source $ZSH_PLUGINS/$plugin/$plugin.plugin.zsh
 done
+
+source /usr/share/nvm/init-nvm.sh
 
 update_system_on_boot.sh

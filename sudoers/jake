@@ -1,0 +1,24 @@
+jake ALL=(ALL) /usr/bin/pacman -S *
+jake ALL=(ALL) /usr/bin/pacman -Syu
+jake ALL=(ALL) /usr/bin/pacman -U *
+jake ALL=(ALL) /usr/bin/pacman -U --config /etc/pacman.conf -- /home/jake/.cache/yay/* *
+jake ALL=(ALL) /usr/bin/pacman -D *
+jake ALL=(ALL) /usr/bin/mount -t cifs *
+jake ALL=(ALL) /usr/bin/umount -t cifs *
+jake ALL=(ALL) /usr/bin/systemctl restart systemd-udevd
+jake ALL=(ALL) /usr/bin/modprobe -r usb_storage
+jake ALL=(ALL) /usr/bin/modprobe usb_storage
+
+jake ALL=(ALL) NOPASSWD: /usr/bin/shutdown
+jake ALL=(ALL) NOPASSWD:SETENV: /usr/bin/iwgtk
+jake ALL=(ALL) NOPASSWD: /usr/bin/systemctl * nordvpnd
+jake ALL=(ALL) NOPASSWD: /usr/bin/systemctl status *
+jake ALL=(ALL) NOPASSWD: /usr/bin/pkill -U root -f iwgtk
+jake ALL=(ALL) NOPASSWD: /usr/bin/timedatectl set-timezone *
+
+
+
+#jake ALL=(ALL) NOPASSWD: /usr/bin/
+#jake ALL=(ALL) NOPASSWD: /usr/bin/
+#jake ALL=(ALL) NOPASSWD: /usr/bin/
+#jake ALL=(ALL) NOPASSWD: /usr/bin/

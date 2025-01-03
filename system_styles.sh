@@ -3,7 +3,7 @@
 # Global variables to be used by any other programs (e.g status bars)
 
 # Forest green and white text
-export COLOR_DARK_BACKGROUND="#114444FF"
+export COLOR_DARK_BACKGROUND="#113355FF"
 export COLOR_DARK_BACKGROUND_ALT="#336655FF"
 export COLOR_DARK_TEXT="#FFFFEEFF"
 export COLOR_DARK_TEXT_ALT="#99BB99FF"

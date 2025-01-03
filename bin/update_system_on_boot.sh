@@ -17,6 +17,9 @@ if [ "$EUID" -eq 0 ] && [ ! -f /tmp/booted_root ]; then
     echo "Cleaning up orphaned packages..."
     pacman -Qdtq | pacman -Rns - 2>/dev/null
     touch /tmp/booted_root
+    modprobe -r usb_storage
+    modprobe usb_storage
+    systemctl restart systemd-udevd
 fi
 
 # if root and we have run this
@@ -35,4 +38,5 @@ if [ ! -f /tmp/booted ]; then
     fi
     echo "Updating system..."
     yay -Syyu --noconfirm --answerdiff=None --answeredit=None && touch /tmp/booted && chown jake:jake /tmp/booted
+    echo "Updates complete. Reloading usb drivers"
 fi

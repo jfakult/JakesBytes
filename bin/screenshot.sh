@@ -1,5 +1,6 @@
 #!/bin/bash
 
+mkdir -p $HOME/Documents/Screenshots
 SDIR="$HOME/Documents/Screenshots"
 # yyyy-mm-dd-hh:mm:ss
 date_str=$(date +%Y-%m-%d-%H:%M:%S)
