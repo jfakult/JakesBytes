@@ -3,7 +3,8 @@ Description=Nextcloud Systemd user imp instead of autostart
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/nextcloud --background
+ExecStart=echo hello
+#ExecStart=/usr/bin/nextcloud --background
 ExecStop=/usr/bin/pkill -f nextcloud
 Restart=on-failure
 RestartSec=5s

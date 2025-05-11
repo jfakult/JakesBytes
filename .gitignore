@@ -5,6 +5,13 @@ chromium/
 melonDS/
 balenaEtcher/
 GIMP/
+PrusaSlicer/
+*.log
+go/
+**/logs/
+spotify/
+FreeCAD/
+wireshark/
 
 # VSCode
 *vscode*

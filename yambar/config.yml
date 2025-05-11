@@ -88,6 +88,14 @@ bar:
                   - string: {text: "\uf4bc", font: *hackfont, foreground: *cpu_color}
                   - string: {text: " {cpu}%", foreground: *text_color}
 
+    # show hard drive usage as %, color green to red depending on usage
+    - script:
+        path: ~/bin/hard_drive_usage.sh
+        poll-interval: 10000
+        content:
+          - string: { text: "\uF0A0 ", foreground: *cpu_color }
+          - string: { text: "{usage}%", foreground: *text_color }
+
     - mem:
         poll-interval: 4000
         content:
@@ -119,14 +127,15 @@ bar:
                   map:
                     conditions:
                     # unknown, not present, down, lower layers down, testing, dormant
+                    # line 128: https://github.com/neonkore/yambar/blob/master/modules/network.c
                       state == down || state == unknown || state == not-present || state == lower-layer-down || state == testing || state == dormant:
                         - string: {text: "\uF4AD", <<: *icon, foreground: *ssid_color, on-click: "~/bin/wifi.sh"}
                         - string: {text: " offline", foreground: *text_color_dim, on-click: "~/bin/wifi.sh"}
                       state == up:
                         - ramp:
                             tag: signal
-                            min: -90
-                            max: -30
+                            min: -100
+                            max: -22
                             items:
                               # - string: {text: "\U000F0928", foreground: "5FD7FFFF"}
                               # - string: {text: "\U000F0925", foreground: "5FD7FFFF"}
@@ -199,7 +208,7 @@ bar:
                 - ramp:
                     tag: capacity
                     min: 0
-                    max: 90
+                    max: 100
                     items:
                       - string: {text: ' ', foreground: ffa600ff, <<: *icon, on-click: { left: "~/bin/power/set_power_profile.sh"}}
                       - string: {text: ' ', foreground: ff0000ff, <<: *icon, on-click: { left: "~/bin/power/set_power_profile.sh"}}

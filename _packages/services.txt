@@ -8,6 +8,7 @@ nvidia-hibernate.service
 nvidia-resume.service
 nvidia-suspend.service
 power-profiles-daemon.service
+reflector.service
 seatd.service
 systemd-network-generator.service
 systemd-networkd-wait-online.service

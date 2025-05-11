@@ -22,6 +22,7 @@ alias record="pw-record -P '{ stream.capture.sink=true }'"
 alias less="less -R"
 alias hello="echo Hi!"
 alias whoa="That was crazy"
+alias speed="speedtest-cli --secure"
 
 function android() {
 	if [ -z "$1" ]; then
@@ -65,9 +66,9 @@ prompt_dir() {
 export PROMPT='[%n@%m $(prompt_dir)]$ '
 
 
-export NNN_FIFO=/tmp/nnn.fifo
-export NNN_PLUG="i:preview-tui"
-export NNN_TERMINAL=kitty
+#export NNN_FIFO=/tmp/nnn.fifo
+#export NNN_PLUG="i:preview-tui"
+#export NNN_TERMINAL=kitty
 function open() {
 	# Wrap in parentheses to avoid seeing background task output
 	(xdg-open "$@" >/dev/null &)
@@ -96,5 +97,9 @@ for plugin in "${ZSH_PLUGINS_LIST[@]}"; do
 done
 
 source /usr/share/nvm/init-nvm.sh
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
 
 update_system_on_boot.sh

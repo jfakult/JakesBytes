@@ -17,15 +17,32 @@ if [ "$EUID" -eq 0 ] && [ ! -f /tmp/booted_root ]; then
     echo "Cleaning up orphaned packages..."
     pacman -Qdtq | pacman -Rns - 2>/dev/null
     touch /tmp/booted_root
-    modprobe -r usb_storage
-    modprobe usb_storage
-    systemctl restart systemd-udevd
 fi
 
 # if root and we have run this
 if [ "$EUID" -eq 0 ] && [ -f /tmp/booted_root ]; then
     echo "Updating system..."
+
+    kernel_needs_upgrade=$(pacman -Qu | grep linux)
     pacman -Syyu --noconfirm
+
+    if [ -n "$kernel_needs_upgrade" ]; then
+        echo "Kernel was upgraded during this update. USBs may not work until reboot."
+        read -p "Reboot now? [Y/n] " -n 1 -r
+        if [[ ! $REPLY =~ ^[Yy]?$ ]]; then
+            echo
+            echo "Your mother would be dissapointed in you."
+            exit 0
+        else
+            echo "Rebooting in 3 seconds (ctrl-c to cancel)..."
+            sleep 1
+            echo 2
+            sleep 1
+            echo 1
+            sleep 1
+            reboot
+        fi
+    fi
 fi
 
 # If /tmp/booted exists, then the system has already been updated
@@ -37,6 +54,27 @@ if [ ! -f /tmp/booted ]; then
         exit 0
     fi
     echo "Updating system..."
+
+    sudo pacman -Sy
+    kernel_needs_upgrade=$(pacman -Qu | grep linux)
+
     yay -Syyu --noconfirm --answerdiff=None --answeredit=None && touch /tmp/booted && chown jake:jake /tmp/booted
-    echo "Updates complete. Reloading usb drivers"
+    
+    if [ -n "$kernel_needs_upgrade" ]; then
+        echo "Kernel was upgraded during this update. USBs may not work until reboot."
+        read -p "Reboot now? [Y/n] " -n 1 -r
+        if [[ ! $REPLY =~ ^[Yy]?$ ]]; then
+            echo
+            echo "Your mother would be dissapointed in you."
+            exit 0
+        else
+            echo "Rebooting in 3 seconds (ctrl-c to cancel)..."
+            sleep 1
+            echo 2
+            sleep 1
+            echo 1
+            sleep 1
+            reboot
+        fi
+    fi
 fi

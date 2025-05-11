@@ -28,13 +28,13 @@ sed -i'' "s/highlight_color=.*/highlight_color=${COLOR_DARK_HIGHLIGHT:0:7}/g" "$
 sway_sock=$(sway --get-socketpath)
 
 if [ -z "$sway_sock" ]; then
-    #WLR_DRM_DEVICES=/dev/dri/card0:/dev/dri/card1
-    sway &
+    export WLR_DRM_DEVICES=/dev/dri/card1
+    touch /tmp/sway_launched
+    sway >> ~/sway.log 2>&1
+    rm /tmp/sway_launched
 else
     pkill -f ^swayidle
     pkill -f ^yambar
     pkill -f sway-audio-idle-inhibit
     swaymsg -s $sway_sock reload
 fi
-
-touch /tmp/sway_launched

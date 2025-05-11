@@ -23,7 +23,7 @@ recent.display_filter: udp.stream eq 9
 gui.geometry_main_x: 0
 gui.geometry_main_y: 0
 gui.geometry_main_width: 1706
-gui.geometry_main_height: 1041
+gui.geometry_main_height: 1017
 
 # Main window maximized.
 # true or false (case-insensitive).
@@ -31,7 +31,7 @@ gui.geometry_main_maximized: false
 
 # Main window geometry state.
 # Hex byte string.
-gui.geometry_main: 01d9d0cb000300000000000000000000000006a9000004100000000000000000000006a900000410000000000000000006aa0000000000000000000006a900000410
+gui.geometry_main: 01d9d0cb000300000000000000000000000006a9000003f80000000000000000000006a9000003f8000000000000000006aa0000000000000000000006a9000003f8
 
 # Leftalign Action Buttons.
 # true or false (case-insensitive).
@@ -75,6 +75,17 @@ gui.search_multiple_occurs: false
 # Find packet search type.
 # One of: DISPLAY_FILTER, HEX_VALUE, STRING, REGEX
 gui.search_type: DISPLAY_FILTER
+
+# Geometry and maximized state of PreferencesDialog window.
+# Decimal integers.
+gui.geom.PreferencesDialog.x: 0
+gui.geom.PreferencesDialog.y: 0
+gui.geom.PreferencesDialog.width: 695
+gui.geom.PreferencesDialog.height: 542
+# true or false (case-insensitive).
+gui.geom.PreferencesDialog.maximized: false
+# Qt Geometry State (hex byte string).
+gui.geom.PreferencesDialog.qt_geometry: 01d9d0cb000300000000000000000000000002b60000021d0000000000000000000002b60000021d000000000000000006aa0000000000000000000002b60000021d
 
 # Geometry and maximized state of FollowStreamDialog window.
 # Decimal integers.
