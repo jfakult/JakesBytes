@@ -6,12 +6,16 @@ melonDS/
 balenaEtcher/
 GIMP/
 PrusaSlicer/
+Nextcloud/
+ghb/
 *.log
 go/
 **/logs/
 spotify/
 FreeCAD/
 wireshark/
+BraveSoftware/
+godot/
 
 # VSCode
 *vscode*

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<FileZilla3 version="3.68.1" platform="*nix">
+<FileZilla3 version="3.69.3" platform="*nix">
 	<Settings>
 		<Setting name="Use Pasv mode">1</Setting>
 		<Setting name="Limit local ports">0</Setting>
@@ -115,42 +115,44 @@
 		<Setting name="Disable update footer">0</Setting>
 		<Setting name="Highest shown overlay id">0</Setting>
 		<Setting name="Prompt password save">0</Setting>
-		<Setting name="Local filelist colwidths">170 80 120 120</Setting>
 		<Setting name="Remote filelist colwidths">259 75 80 100 80 85</Setting>
 		<Setting name="Local filelist shown columns">1111</Setting>
 		<Setting name="Remote filelist shown columns">111111</Setting>
 		<Setting name="Local filelist column order">0,1,2,3</Setting>
 		<Setting name="Remote filelist column order">0,1,2,3,4,5</Setting>
 		<Setting name="Remote filelist sortorder">0 0</Setting>
+		<Setting name="Persistent Choices">1</Setting>
+		<Setting name="Remote recursive operation list refresh">0</Setting>
+		<Setting name="Site Manager position">0 0 0 1096 632 </Setting>
+		<Setting name="Sitemanager last selected">0/Fakult.net/Public</Setting>
+		<Setting name="Window position and size">0 0 0 1706 924 </Setting>
+		<Setting name="Local filelist colwidths">379 80 120 120</Setting>
 		<Setting name="File associations (v2)" platform="unix">cpp /usr/bin/vim %f
 js /usr/bin/code %f
 png /usr/bin/gimp-2.10 %f
+py /usr/bin/code
+sh /usr/bin/code
 vue /usr/bin/code %f
 yml /usr/bin/code %f</Setting>
-		<Setting name="Persistent Choices">1</Setting>
-		<Setting name="Remote recursive operation list refresh">0</Setting>
-		<Setting name="Greeting version">3.68.1</Setting>
-		<Setting name="Site Manager position">0 0 0 1096 632 </Setting>
-		<Setting name="Sitemanager last selected">0/Fakult.net/Public</Setting>
-		<Setting name="Splitter positions (v2)">50 -225 500000000 100 305 500000000</Setting>
+		<Setting name="Resolve local symlinks" platform="unix">0</Setting>
+		<Setting name="Greeting version">3.69.3</Setting>
+		<Setting name="Queue column widths">324 60 406 80 60 150</Setting>
 		<Setting name="Local filelist sortorder">1 3</Setting>
-		<Setting name="Queue column widths">324 60 180 80 60 150</Setting>
-		<Setting name="Window position and size">0 0 0 1706 949 </Setting>
+		<Setting name="Splitter positions (v2)">50 -310 500000000 100 356 500000000</Setting>
 		<Setting name="Tab data" sensitive="1">
 			<Tabs>
 				<Tab connected="1" selected="1">
-					<Host>fakult.net</Host>
+					<Host>192.168.1.144</Host>
 					<Port>2222</Port>
 					<Protocol>1</Protocol>
 					<Type>0</Type>
-					<User>butlah</User>
-					<Keyfile>/home/jake/.ssh/private_key.ppk</Keyfile>
-					<Logontype>5</Logontype>
+					<User>root</User>
+					<Pass encoding="base64">VGhhYmVldC5idXRsYWgyLjA=</Pass>
+					<Logontype>1</Logontype>
 					<EncodingType>Auto</EncodingType>
 					<BypassProxy>0</BypassProxy>
-					<Name>Public</Name>
-					<Site>0/Fakult.net/Public</Site>
-					<RemotePath>1 0 3 usr 3 lib 15 plexmediaserver 5 media 9 extension</RemotePath>
+					<Site></Site>
+					<RemotePath>1 0 4 home 6 butlah 7 webapps 6 resume 6 static 6 resume 5 jacob</RemotePath>
 					<LocalPath>/home/jake/Downloads/</LocalPath>
 				</Tab>
 			</Tabs>

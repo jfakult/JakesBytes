@@ -266,6 +266,9 @@ bindsym $mod+r mode "resize"
 
 exec_always --no-startup-id "yambar"
 
+# kanshi: auto update displays / output positions
+exec_always --no-startup-id "kanshi -c ~/.config/kanshi/config"
+
 include /etc/sway/config.d/*
 include keyboard_shortcuts.conf
 include gestures.conf

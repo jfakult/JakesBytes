@@ -188,7 +188,7 @@ bar:
 
     - clock:
         foreground: FFD787FF
-        time-format: "%a %b %d, %H:%M"
+        time-format: "%a %b %d, %H:%M:%S"
         content:
           - string: {text: "{time}", foreground: *text_color, on-click: "galendae"}
 

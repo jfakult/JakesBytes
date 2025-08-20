@@ -3,3 +3,7 @@
 x-scheme-handler/mailto=chromium.desktop
 text/x-processing=processing-pde.desktop
 x-scheme-handler/pde=processing-pde.desktop
+text/mhtml=chromium.desktop
+message/rfc822=chromium.desktop
+text/html=chromium.desktop
+video/mp4=chromium.desktop

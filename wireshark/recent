@@ -1,4 +1,4 @@
-# Recent settings file for Wireshark 4.4.2.
+# Recent settings file for Wireshark 4.4.6.
 #
 # This file is regenerated each time Wireshark is quit
 # and when changing configuration profile.
@@ -95,11 +95,11 @@ gui.show_bytes_show: ASCII
 
 # Main window upper (or leftmost) pane size.
 # Decimal number.
-gui.geometry_main_upper_pane: 451
+gui.geometry_main_upper_pane: 238
 
 # Main window middle pane size.
 # Decimal number.
-gui.geometry_main_lower_pane: 851
+gui.geometry_main_lower_pane: 318
 
 # Main window master splitter state.
 # Hex byte string.

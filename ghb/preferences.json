@@ -20,6 +20,7 @@
         "LogLongevity": "immortal",
         "LoggingLevel": "1",
         "LowBatteryLevel": 15,
+        "MaxTitleDuration": 0.0,
         "MinTitleDuration": 10,
         "NotifyOnQueueDone": true,
         "PauseEncodingOnBatteryPower": false,

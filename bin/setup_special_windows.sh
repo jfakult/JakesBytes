@@ -27,7 +27,7 @@ swaymsg -t get_tree | jq -r '.. | select(.type?) | select(.focused==true) | .win
 ##################### IWGTK SETUP #####################
 
 # Assuming: 2560x1600
-window_width=660
+window_width=750
 window_height=1000
 
 window_width=$(echo "$window_width / $scale_factor" | bc)
@@ -68,7 +68,7 @@ swaymsg -t subscribe -m '["window"]' | jq --unbuffered -r '
 # Assuming: 2560x1600
 # Unfortunately, the window size is hardcoded in the program
 # So this was trial and error
-window_width=530
+window_width=560
 window_height=500
 
 window_width=$(echo "$window_width / $scale_factor" | bc)

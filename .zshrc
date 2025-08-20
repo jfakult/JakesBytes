@@ -15,14 +15,21 @@ export ZSH_PLUGINS="/usr/share/zsh/plugins"
 
 alias automount="systemctl start udiskie --user"
 alias s="$HOME/bin/launch_sway.sh"
-alias shut="shutdown now"
-alias nordstart="sudo systemctl enable --now nordvpnd && nordvpn connect"
+alias shut="shutdown -h now"
+#alias nordstart="sudo systemctl enable --now nordvpnd && nordvpn connect"
+alias nordtcp='nordvpn set technology openvpn && nordvpn set protocol tcp'
+alias nordudp='nordvpn set technology nordlynx'
 alias wifi="wifi.sh"
 alias record="pw-record -P '{ stream.capture.sink=true }'"
 alias less="less -R"
 alias hello="echo Hi!"
-alias whoa="That was crazy"
+alias whoa="That was crazy!"
 alias speed="speedtest-cli --secure"
+
+# SSH key caching
+#pkill -f ssh-agent
+#eval "$(ssh-agent -s 2>/dev/null)" 2>/dev/null
+#ssh-add ~/.ssh/id_ed25519
 
 function android() {
 	if [ -z "$1" ]; then
