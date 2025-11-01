@@ -1,0 +1,11 @@
+[Unit]
+Description=Yambar status bar
+After=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/yambar
+ExecStop=/usr/bin/pkill -f yambar
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

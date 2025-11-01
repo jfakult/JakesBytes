@@ -1,5 +1,7 @@
+cups.path
 avahi-daemon.service
 bluetooth.service
+cups.service
 docker.service
 iptables.service
 iwd.service
@@ -14,6 +16,7 @@ systemd-networkd.service
 systemd-resolved.service
 systemd-timesyncd.service
 avahi-daemon.socket
+cups.socket
 systemd-networkd.socket
 systemd-userdbd.socket
 remote-fs.target

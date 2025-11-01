@@ -1,3 +1,7 @@
+# This is the notification daemon
+# To restart it after editing this file, run:
+# makectl reload
+
 # GLOBAL
 max-history=100
 sort=-time
@@ -38,15 +42,17 @@ text-color=#ffffff
 border-color=#1D7954
 
 
+# For sound and brightness e.g
 [category=setting_overlay]
-width=256
-height=48
-margin=10,10,40,10
-padding=8
+width=384
+height=32
+#margin=0
+outer-margin=0,0,40,0
+padding=12
 border-size=2
-border-radius=10
+border-radius=8
 icons=1
-max-icon-size=32
+max-icon-size=16
 icon-location=left
 actions=1
 history=1
@@ -55,10 +61,14 @@ default-timeout=2000
 ignore-timeout=0
 layer=overlay
 anchor=bottom-center
-background-color=#1e1e2eaa
-text-color=#ddddff
-border-color=#cba6f7
-progress-color=over #b9b4caaa
+#COLOR_DARK_BACKGROUND_OPAQUE
+background-color=#443333aa
+#COLOR_DARK_TEXT
+text-color=#FFFFEE
+#COLOR_DARK_OUTLINE
+border-color=#221111
+#COLOR_DARK_BACKGROUND
+progress-color=#552211
 
 [category=toggle]
 font=Hack 16

@@ -264,7 +264,8 @@ bindsym $mod+r mode "resize"
 #    }
 #}
 
-exec_always --no-startup-id "yambar"
+# start yambar and send logs to ~/yambar.log  (can add YAMBAR_DISABLE_NL80211=1)
+exec_always --no-startup-id 'systemctl --user restart yambar'
 
 # kanshi: auto update displays / output positions
 exec_always --no-startup-id "kanshi -c ~/.config/kanshi/config"

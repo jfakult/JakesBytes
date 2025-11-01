@@ -3,7 +3,7 @@
 icon: &icon
   font: "HackNerdFont:pixelsize=28"
 
-background_color: &background_color 113355FF
+background_color: &background_color 552211FF
 text_color: &text_color FFFFEEFF
 text_color_dim: &text_color_dim 99BB99FF
 text_color_error: &text_color_error FF5522FF
@@ -118,73 +118,49 @@ bar:
                   foreground: *text_color_dim
                   # deco: {underline: {size: 1, color: BFFF00FF}}
 
+    # have to combine them. Yambar launches each as it's own module which causes spam
     - network:
-        poll-interval: 8000
+        poll-interval: 20000
         content:
           - map:
               conditions:
                 name == wlan0:
                   map:
                     conditions:
-                    # unknown, not present, down, lower layers down, testing, dormant
-                    # line 128: https://github.com/neonkore/yambar/blob/master/modules/network.c
                       state == down || state == unknown || state == not-present || state == lower-layer-down || state == testing || state == dormant:
                         - string: {text: "\uF4AD", <<: *icon, foreground: *ssid_color, on-click: "~/bin/wifi.sh"}
                         - string: {text: " offline", foreground: *text_color_dim, on-click: "~/bin/wifi.sh"}
+
                       state == up:
+                        # wifi icon ramp + SSID
                         - ramp:
                             tag: signal
                             min: -100
                             max: -22
                             items:
-                              # - string: {text: "\U000F0928", foreground: "5FD7FFFF"}
-                              # - string: {text: "\U000F0925", foreground: "5FD7FFFF"}
-                              # - string: {text: "\U000F0922", foreground: "5FD7FFFF"}
-                              # - string: {text: "\U000F091F", foreground: "5FD7FFFF"}
-                              # - string: {text: "\U000F092F", foreground: "5FD7FFFF"}
                               - string: {text: "\U000F08FE", foreground: *ssid_color, <<: *icon, on-click: "~/bin/wifi.sh"}
                               - string: {text: "\U000F08F4", foreground: *ssid_color, <<: *icon, on-click: "~/bin/wifi.sh"}
                               - string: {text: "\U000F08F6", foreground: *ssid_color, <<: *icon, on-click: "~/bin/wifi.sh"}
                               - string: {text: "\U000F08F8", foreground: *ssid_color, <<: *icon, on-click: "~/bin/wifi.sh"}
                               - string: {text: "\U000F08FA", foreground: *ssid_color, <<: *icon, on-click: "~/bin/wifi.sh"}
                         - string: {text: " {ssid}", foreground: *text_color, on-click: "~/bin/wifi.sh"}
+
+                        # IP (prefer v4)
+                        - string: {text: " ({ipv4})", foreground: *text_color, on-click: "~/bin/wifi.sh"}
+
                       default:
                         - string: {text: "\uF254", <<: *icon, foreground: *ssid_color, on-click: "~/bin/wifi.sh"}
                         - string: {text: " {ssid}", foreground: *text_color, on-click: "~/bin/wifi.sh"}
 
-    # Show ipv4 address (or ipv6 if no ipv4)
-    - network:
-        poll-interval: 30000
+    - script:
+        path: ~/bin/get_network_speed.sh
+        args: ["1.9"]
+        poll-interval: 2000
         content:
-          - map:
-              conditions:
-                name == wlan0:
-                  map:
-                    conditions:
-                      state == up:
-                        - string: {text: "({ipv4})", foreground: *text_color, on-click: "~/bin/wifi.sh"}
-                      default:
-                        - string: {text: "({ipv6})", foreground: *text_color, on-click: "~/bin/wifi.sh"}
-
-    # Show upload and download speed
-    - network:
-        poll-interval: 4000
-        content:
-          - map:
-              conditions:
-                name == wlan0:
-                  map:
-                    conditions:
-                      state == up:
-                        - string: {text: " \uF093", foreground: *bitrate_color}
-                        - string: {text: " {ul-speed:mb}", foreground: *text_color}
-                        - string: {text: " \uF019", foreground: *bitrate_color}
-                        - string: {text: " {dl-speed:mb}", foreground: *text_color}
-                      default:
-                        - string: {text: " \uF093", foreground: *bitrate_color}
-                        - string: {text: " 0", foreground: *text_color}
-                        - string: {text: " \uF019", foreground: *bitrate_color}
-                        - string: {text: " 0", foreground: *text_color}
+          - string: {text: " \uF093", foreground: *bitrate_color}      # upload icon
+          - string: {text: " {UL}", foreground: *text_color}     # UL Mbps
+          - string: {text: " \uF019", foreground: *bitrate_color}      # download icon
+          - string: {text: " {DL}", foreground: *text_color}     # DL Mbps
 
     - clock:
         foreground: FFD787FF
@@ -195,8 +171,8 @@ bar:
     - backlight:
           name: amdgpu_bl1
           content:
-            - string: { text: "󰍺 ", foreground: 4488ffff, on-click: { left: "/usr/bin/wdisplays" } }
-            - string: { text: "{percent}%", on-click: { left: "/usr/bin/wdisplays" } }
+            - string: { text: "󰍺 ", foreground: 4488ffff, on-click: { left: "/bin/sh -c 'GTK_THEME=Adwaita:dark /usr/bin/wdisplays'" } }
+            - string: { text: "{percent}%", on-click: { left: "/bin/sh -c 'GTK_THEME=Adwaita:dark /usr/bin/wdisplays'" } }
 
     - battery:
         name: BAT1

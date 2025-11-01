@@ -25,6 +25,7 @@ alias less="less -R"
 alias hello="echo Hi!"
 alias whoa="That was crazy!"
 alias speed="speedtest-cli --secure"
+alias cp2="rsync -ah --info=progress2 $1 $2"
 
 # SSH key caching
 #pkill -f ssh-agent

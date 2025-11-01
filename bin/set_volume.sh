@@ -32,7 +32,7 @@ get_icon() {
 
 # Notify
 notify_user() {
-	notify-send -u low -c setting_overlay -h string:x-canonical-private-synchronous:sys-notify -h int:value:$(get_volume) -i "$(get_icon)" "$(get_volume)"
+	notify-send -u low -c setting_overlay -h string:x-canonical-private-synchronous:sys-notify -h int:value:$(get_volume) -i "$(get_icon)" "" #"$(get_volume)"
 }
 
 # Get icons

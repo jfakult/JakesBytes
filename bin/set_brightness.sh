@@ -1,6 +1,10 @@
 #!/bin/bash
 
-MIN_BRIGHTNESS=0.1
+MAX_BRIGHTNESS=$(brightnessctl max)
+MIN_BRIGHTNESS=$(echo "$MAX_BRIGHTNESS * 0.1" | bc -l)
+
+#echo "Max brightness: $MAX_BRIGHTNESS"
+#echo "Min brightness: $MIN_BRIGHTNESS"
 
 iDIR="$HOME/.config/mako/icons"
 
@@ -33,24 +37,46 @@ notify_user() {
 }
 
 # Set hardware brightness
-brightnessctl set -- "$1" && notify_user && brightnessctl get > /tmp/last_brightness && chown jake:jake /tmp/last_*
+brightnessctl set -- "$1" >/dev/null && notify_user && brightnessctl get > /tmp/last_brightness && chown jake:jake /tmp/last_*
 
-current_brightness=$(echo "scale=2; (1-$MIN_BRIGHTNESS) * (($(brightnessctl get) / 255.0)) + $MIN_BRIGHTNESS" | bc -l)
+current_brightness=$(brightnessctl get)
+#echo "Current brightness: $current_brightness"
 
 # Also overlay software brightness
-#gamma_pid=$(pgrep gammastep)
+existing_gammastep_pids=$(pgrep -f "gammastep -l")
 
+#echo $current_brightness
 
-pkill -f -9 "gammastep -l"
+#pkill -f -9 "gammastep -l" > /dev/null
+
+ps aux | grep gammastep | grep -v grep
 
 # If user did not pass in "--no-gamma" flag
 if [ "$2" = "--no-gamma" ]; then
-	echo "Skipping software dimming"
+	pkill -f -9 "gammastep -l" > /dev/null
 else
-	gammastep -l 0:0 -o -P -t 6500:6500 -b $current_brightness:$current_brightness 2>/dev/null &
-fi
-#sleep 1
+	normalized_brightness=$(echo "scale=2; $current_brightness / $MAX_BRIGHTNESS" | bc -l)
 
-#if [ -n "$gamma_pid" ]; then
-#	kill $gamma_pid
+	# clamp 0.1 to 1.0
+	if (( $(echo "$normalized_brightness < $MIN_BRIGHTNESS / $MAX_BRIGHTNESS" | bc -l) )); then
+		normalized_brightness=$(echo "scale=2; $MIN_BRIGHTNESS / $MAX_BRIGHTNESS" | bc -l)
+	fi
+	echo "Setting software brightness to $normalized_brightness"
+
+	# Unfortunately gammastep doesn't have a reload option so we have to kill all previous instances
+	# It also doesn't preempt, so we can't run 2 and kill the old one
+	# Screen just flashes a bit while the program reloads, not too bad
+	pkill -f -9 "gammastep -l" > /dev/null
+	gammastep -l 0:0 -o -t 4500:4500 -P -b $normalized_brightness:$normalized_brightness & # 2>/dev/null &
+fi
+
+ps aux | grep gammastep | grep -v grep
+
+echo "Existing gammastep pids: $existing_gammastep_pids"
+echo "Current gammastep ids: $(pgrep -f "gammastep -l")"
+# kill previous instances of gammastep
+#if [ ! -z "$existing_gammastep_pids" ]; then
+#	kill $existing_gammastep_pids
 #fi
+
+echo "done"

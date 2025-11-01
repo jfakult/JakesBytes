@@ -25,6 +25,28 @@ sed -i'' "s/fringe_date_color=.*/fringe_date_color=${COLOR_DARK_TEXT_ALT:0:7}/g"
 sed -i'' "s/highlight_color=.*/highlight_color=${COLOR_DARK_HIGHLIGHT:0:7}/g" "$HOME/.config/galendae/galendae.conf"
 
 
+# Mako (notification daemon) style overwrite
+sed -i'' -E '/^#COLOR_DARK_BACKGROUND$/ {
+  n
+  s/^([A-Za-z-]+=).*/\1'"${COLOR_DARK_BACKGROUND:0:7}"'/
+}' "$HOME/.config/mako/config"
+sed -i'' -E '/^#COLOR_DARK_TEXT$/ {
+  n
+  s/^([A-Za-z-]+=).*/\1'"${COLOR_DARK_TEXT:0:7}"'/
+}' "$HOME/.config/mako/config"
+sed -i'' -E '/^#COLOR_DARK_HIGHLIGHT$/ {
+    n
+    s/^([A-Za-z-]+=).*/\1'"${COLOR_DARK_HIGHLIGHT:0:7}"'/
+}' "$HOME/.config/mako/config"
+sed -i'' -E '/^#COLOR_DARK_BACKGROUND_OPAQUE$/ {
+    n
+    s/^([A-Za-z-]+=).*/\1'"${COLOR_DARK_BACKGROUND_OPAQUE:0:9}"'/
+}' "$HOME/.config/mako/config"
+sed -i'' -E '/^#COLOR_DARK_OUTLINE$/ {
+    n
+    s/^([A-Za-z-]+=).*/\1'"${COLOR_DARK_OUTLINE:0:7}"'/
+}' "$HOME/.config/mako/config"
+
 sway_sock=$(sway --get-socketpath)
 
 if [ -z "$sway_sock" ]; then

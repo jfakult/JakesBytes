@@ -15,7 +15,7 @@ if [ -z "$SCALE_FACTOR" ]; then
     exit 1
 fi
 
-SIZE_STEP=0.25
+SIZE_STEP=0.1
 
 if [ "$1" == "+" ]; then
     SCALE_FACTOR=$(echo "$SCALE_FACTOR + $SIZE_STEP" | bc)

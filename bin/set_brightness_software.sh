@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo $@
+
 if [ -z "$1" ]; then
 	echo "Usage: $0 <brightness>"
 	exit 1

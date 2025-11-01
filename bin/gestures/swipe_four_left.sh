@@ -2,10 +2,11 @@
 
 # Get the app_id of the focused window
 focused_app=$(swaymsg -t get_tree | jq '.. | select(.focused? == true).app_id')
+focused_instance=$(swaymsg -t get_tree | jq '.. | select(.focused? == true).window_properties.instance')
 
-# Check if the focused application is Chromium
-if [[ $focused_app == *"chromium"* ]]; then
-  # Use wtype to simulate the Ctrl+W key press
+# Check if the focused application is Chromium, or instance is brave
+if [[ "$focused_app" == *"chromium"* ]] || [[ "$focused_instance" == *"brave"* ]]; then
+  # Use wtype to simulate the Ctrl+Shift+Tab key press
   wtype -M Ctrl -M Shift -k Tab -m Shift -m Ctrl
 else #if [[ "$focused_app" == *"foot"* ]]; then
   echo
