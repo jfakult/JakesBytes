@@ -15,6 +15,7 @@ systemd-network-generator.service
 systemd-networkd.service
 systemd-resolved.service
 systemd-timesyncd.service
+tailscaled.service
 avahi-daemon.socket
 cups.socket
 systemd-networkd.socket

@@ -26,6 +26,8 @@ alias hello="echo Hi!"
 alias whoa="That was crazy!"
 alias speed="speedtest-cli --secure"
 alias cp2="rsync -ah --info=progress2 $1 $2"
+alias nordon="nordvpn connect"
+alias nordoff="nordvpn disconnect"
 
 # SSH key caching
 #pkill -f ssh-agent
@@ -33,6 +35,10 @@ alias cp2="rsync -ah --info=progress2 $1 $2"
 #ssh-add ~/.ssh/id_ed25519
 
 function android() {
+	sudo ln -sf /dev/binderfs/anbox-binder    /dev/binder
+	sudo ln -sf /dev/binderfs/anbox-hwbinder  /dev/hwbinder
+	sudo ln -sf /dev/binderfs/anbox-vndbinder /dev/vndbinder
+
 	if [ -z "$1" ]; then
 		echo "Usage: android <command>"
 		return

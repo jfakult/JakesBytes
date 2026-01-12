@@ -12,4 +12,5 @@ x-scheme-handler/https=chromium.desktop
 x-scheme-handler/about=chromium.desktop
 x-scheme-handler/unknown=chromium.desktop
 video/x-matroska=vlc.desktop
-application/octet-stream=vlc.desktop
+application/octet-stream=FlashPrint5.desktop
+application/pdf=chromium.desktop

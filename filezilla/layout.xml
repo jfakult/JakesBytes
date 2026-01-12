@@ -1,10 +1,9 @@
 <?xml version="1.0"?>
-<FileZilla3 version="3.69.3" platform="*nix">
-	<Layout Builddate="2025-07-31" Buildtime="14:40:59">
+<FileZilla3 version="3.69.4" platform="*nix">
+	<Layout Builddate="2025-11-11" Buildtime="21:03:29">
 		<Resources />
-		<Language id="en_US" date="1753972859">
+		<Language id="en_US" date="1762895009">
 			<Font font="Adwaita Sans 11" width="903" height="19" />
-			<Dialog name="Settings" width="597" />
 		</Language>
 	</Layout>
 </FileZilla3>

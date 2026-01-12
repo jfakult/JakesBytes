@@ -6,6 +6,7 @@ melonDS/
 balenaEtcher/
 GIMP/
 PrusaSlicer/*
+flashpoint-launcher/*
 Nextcloud/
 ghb/
 *.log
@@ -16,6 +17,12 @@ FreeCAD/
 wireshark/
 BraveSoftware/
 godot/
+PCSX2/
+StardewValley/
+libreoffice/
+retroarch/
+spotify/
+qBittorrent/
 
 # VSCode
 *vscode*

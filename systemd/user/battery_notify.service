@@ -1,0 +1,6 @@
+[Unit]
+Description=Battery low notifier
+
+[Service]
+Type=oneshot
+ExecStart=%h/bin/battery_notify.sh
