@@ -34,12 +34,12 @@ default-timeout=5000
 [urgency=high]
 border-color=#ff8888
 text-color=#ff8888
-default-timeout=10000
+default-timeout=6000
 
 [urgency=critical]
 border-color=#a33b38
 text-color=#a33b38
-default-timeout=0
+default-timeout=8000
 
 [app-name="Spotify"]
 background-color=#1D8954

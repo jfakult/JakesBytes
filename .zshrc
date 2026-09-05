@@ -117,3 +117,4 @@ export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init - zsh)"
 
 update_system_on_boot.sh
+export PATH="$HOME/.local/bin:$PATH"

@@ -34,17 +34,29 @@ done
 
 if [[ -z "$BAT_PATH" ]]; then
   # No battery found (desktop?), just exit quietly.
+  echo "No battery found!"
   exit 0
 fi
 
 cap="$(<"$BAT_PATH/capacity")"
 status="$(<"$BAT_PATH/status")"
 
+# Calculate time remaining, reduce the estimate to 3/4 to be safe
+if [[ -r $BAT_PATH/energy_now && -r $BAT_PATH/power_now ]]; then
+  estimated_time_left=$(( $(<"$BAT_PATH/energy_now") * 60 / $(<"$BAT_PATH/power_now") * 3 / 4 ))
+elif [[ -r $BAT_PATH/charge_now && -r $BAT_PATH/current_now ]]; then
+  estimated_time_left=$(( $(<"$BAT_PATH/charge_now") * 60 / $(<"$BAT_PATH/current_now") * 3 / 4 ))
+else
+  estimated_time_left="N/A"
+fi
+
 # Normalize a bit
 status_lc="$(tr '[:upper:]' '[:lower:]' <<<"$status")"
 
+echo "Time remaining in battery: $estimated_time_left mins"
+
 # If charging/full, clear state and exit
-if [[ "$status_lc" == "charging1" || "$status_lc" == "full1" ]]; then
+if [[ "$status_lc" == "charging" || "$status_lc" == "full" ]]; then
   rm -f "$STATE_FILE"
   exit 0
 fi
@@ -58,6 +70,7 @@ if [[ -f "$STATE_FILE" ]]; then
   # shellcheck disable=SC1090
   source "$STATE_FILE" || true
 fi
+
 
 now="$(date +%s)"
 
@@ -80,14 +93,15 @@ urgency="low"
 extra_hints=()
 
 title="Battery Low"
-body="Battery: ${cap}% (Discharging)"
+body="Battery: ${cap}% (${estimated_time_left} mins left)"
 
 # Decide notification behavior (priority: <10, then <20, then <30)
-if (( cap < 10 )); then
+if (( cap <= 10 )); then
   urgency="critical"
   extra_hints=("${HINTS_10[@]}")
   # Notify every time percentage decrements
-  if [[ -z "${last_pct:-}" ]]; then
+  # Actually, just always notify since we now add an eta
+  if [[ 1 || -z "${last_pct:-}" ]]; then
     should_notify=true
   else
     # Only notify if it went down since last run
@@ -95,7 +109,7 @@ if (( cap < 10 )); then
       should_notify=true
     fi
   fi
-elif (( cap < 20 )); then
+elif (( cap <= 20 )); then
   urgency="critical"
   extra_hints=("${HINTS_20[@]}")
   # Notify immediately when crossing into <20, otherwise every 5 min
@@ -108,7 +122,7 @@ elif (( cap < 20 )); then
       ts20="$now"
     fi
   fi
-elif (( cap < 30 )); then
+elif (( cap <= 30 )); then
   urgency="low"
   extra_hints=("${HINTS_30[@]}")
   # Notify immediately when crossing into <30, otherwise every 15 min

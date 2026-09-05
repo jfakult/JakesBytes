@@ -1,13 +1,14 @@
 package-lock.json
 
-Code/
-chromium/
-melonDS/
-balenaEtcher/
-GIMP/
-PrusaSlicer/*
-flashpoint-launcher/*
-Nextcloud/
+Code
+chromium
+melonDS
+balenaEtcher
+GIMP
+PrusaSlicer
+blender
+flashpoint-launcher
+Nextcloud
 ghb/
 *.log
 go/

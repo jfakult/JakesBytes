@@ -6,9 +6,6 @@ docker.service
 iptables.service
 iwd.service
 nordvpnd.service
-nvidia-hibernate.service
-nvidia-resume.service
-nvidia-suspend.service
 power-profiles-daemon.service
 seatd.service
 systemd-network-generator.service
@@ -19,6 +16,8 @@ tailscaled.service
 avahi-daemon.socket
 cups.socket
 systemd-networkd.socket
+systemd-resolved-monitor.socket
+systemd-resolved-varlink.socket
 systemd-userdbd.socket
 remote-fs.target
 reflector.timer
