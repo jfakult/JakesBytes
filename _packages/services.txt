@@ -2,7 +2,6 @@ cups.path
 avahi-daemon.service
 bluetooth.service
 cups.service
-docker.service
 iptables.service
 iwd.service
 nordvpnd.service
@@ -20,4 +19,6 @@ systemd-resolved-monitor.socket
 systemd-resolved-varlink.socket
 systemd-userdbd.socket
 remote-fs.target
+backup_nag.timer
+paccache.timer
 reflector.timer

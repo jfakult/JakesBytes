@@ -29,6 +29,6 @@ if mountpoint -q "$MNT"; then
 fi
 
 echo "Mounting ${SERVER}:${EXPORT} -> ${MNT} (NFS v4.2)"
-sudo mount -t nfs -o vers=4.2,rw,noatime,timeo=5,retrans=2,soft "${SERVER}:${EXPORT}" "$MNT" -v
+sudo mount -t nfs -o vers=4.2,rw,noatime,nconnect=4,timeo=100,retrans=3,soft "${SERVER}:${EXPORT}" "$MNT" -v
 
 echo "Mounted OK."

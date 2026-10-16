@@ -116,3 +116,14 @@ anchor=top-left
 [category=bottom-right]
 anchor=bottom-right
 
+
+# Backup script notifications (palette from ~/.config/system_styles.sh)
+[app-name="backup"]
+anchor=top-right
+background-color=#443333aa
+text-color=#FFFFEE
+border-color=#AA6644
+
+[app-name="backup" urgency=critical]
+border-color=#FF5522
+text-color=#FF5522

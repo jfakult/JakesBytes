@@ -1,0 +1,96 @@
+# restic --exclude-file (blacklist). Gitignore-style patterns.
+# Carried over from backup.sh: node_modules/ cache/ .cache/
+
+# --- from backup.sh ---
+node_modules/
+cache/
+.cache/
+Cache/
+CachedData/
+GPUCache/
+Code Cache/
+
+# --- package managers / toolchains (reinstallable) ---
+/home/*/.npm
+/home/*/.nvm
+/home/*/.bun
+/home/*/.cargo
+/home/*/.gradle
+/home/*/.pyenv
+/home/*/.conda
+/home/*/miniconda
+/home/*/go/pkg
+/home/*/.dotnet
+/home/*/.vscode
+/home/*/.vscode-R
+/home/*/.vscode-shared
+/home/*/.android
+/home/*/.docker
+__pycache__/
+target/debug/
+target/release/
+.venv/
+venv/
+
+# --- games / emulation / big app data (re-downloadable) ---
+/home/*/.local/share/Steam
+/home/*/.local/share/bottles
+/home/*/.local/share/waydroid
+/home/*/.local/share/Trash
+/root/.local/share/Trash
+/home/*/.local/share/spotify-launcher
+/home/*/.steam
+/home/*/.wine
+/home/*/PlayOnLinux's virtual drives
+
+# --- browsers (profiles are huge; sync handles them) ---
+/home/*/.config/chromium
+/home/*/.config/BraveSoftware
+/home/*/.config/Code
+/home/*/.var
+
+# --- logs, junk, redundant copies ---
+/home/*/sway.log
+/home/*/swayos_setup_log
+/home/*/.config.bak
+/home/*/build
+/home/*/Downloads
+*.tmp
+*.log
+.Trash-*
+
+# --- system dirs under included roots ---
+/root/.cache
+# Pulled PVE/Unraid backups (backup_restic.sh); not copied back onto the array
+/root/backup
+/root/.npm
+
+# --- additions ---
+/home/*/.local/share/containers
+/home/*/.var/app/*/cache
+/home/*/.cargo/registry
+/home/*/go/pkg
+
+# --- ML model weights (re-downloadable, huge) ---
+*.safetensors
+*.gguf
+*.ckpt
+
+# --- from reviewing the first snapshot ---
+# Python packages (pip-reinstallable; e.g. 770MB onnxruntime CUDA lib)
+/home/*/.local/lib/python*
+/root/.local/lib/python*
+# Claude Code binaries (reinstallable). ~/.claude settings/projects ARE kept.
+/home/*/.local/share/claude/versions
+/root/.local/share/claude/versions
+# Root's copies of the same junk that is already excluded under /home
+/root/.wine
+/root/.local/share/bottles
+/root/.local/share/Steam
+/root/.local/share/waydroid
+/root/.cargo
+/root/.npm
+/root/.nvm
+/root/.gradle
+/root/.pyenv
+/root/.bun

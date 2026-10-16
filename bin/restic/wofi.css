@@ -1,0 +1,14 @@
+/* Template: @TOKENS@ are filled in from ~/.config/system_styles.sh by backup_nag.sh */
+window {
+  background-color: @BG@;
+  border: 2px solid @HIGHLIGHT@;
+  border-radius: 8px;
+  font-family: "@FONT@";
+  font-size: 15px;
+}
+#outer { margin: 6px; }
+#input { margin: 6px; background-color: @BG_ALT@; color: @TEXT_ALT@; border: none; border-radius: 6px; }
+#scroll { margin: 4px; }
+#entry { padding: 8px 12px; border-radius: 6px; color: @TEXT@; }
+#entry:selected { background-color: @HIGHLIGHT@; color: @TEXT@; }
+#text:selected { color: @TEXT@; }

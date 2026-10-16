@@ -9,7 +9,7 @@ fi
 # If root and we haven't run this as root
 if [ "$EUID" -eq 0 ] && [ ! -f /tmp/booted_root ]; then
     read -p "Fresh boot detected, update **root** system? [Y/n] " -n 1 -r
-    if [[ ! $REPLY =~ ^[Yy]?$ ]]; then
+    if [[ -n $REPLY && ! $REPLY =~ ^[Yy]$ ]]; then
         echo
         echo "Why you make-a me sad?"
         exit 0
@@ -29,7 +29,7 @@ if [ "$EUID" -eq 0 ] && [ -f /tmp/booted_root ]; then
     if [ -n "$kernel_needs_upgrade" ]; then
         echo "Kernel was upgraded during this update. USBs may not work until reboot."
         read -p "Reboot now? [Y/n] " -n 1 -r
-        if [[ ! $REPLY =~ ^[Yy]?$ ]]; then
+        if [[ ! $REPLY =~ ^[Yy\n]$ ]]; then
             echo
             echo "Your mother would be dissapointed in you."
             exit 0
@@ -48,7 +48,7 @@ fi
 # If /tmp/booted exists, then the system has already been updated
 if [ ! -f /tmp/booted ]; then
     read -p "Fresh boot detected, update **user** system? [Y/n] " -n 1 -r
-    if [[ ! $REPLY =~ ^[Yy]?$ ]]; then
+    if [[ -n $REPLY && ! $REPLY =~ ^[Yy]$ ]]; then
         echo
         echo "Your mother would be dissapointed in you."
         exit 0
@@ -63,7 +63,7 @@ if [ ! -f /tmp/booted ]; then
     if [ -n "$kernel_needs_upgrade" ]; then
         echo "Kernel was upgraded during this update. USBs may not work until reboot."
         read -p "Reboot now? [Y/n] " -n 1 -r
-        if [[ ! $REPLY =~ ^[Yy]?$ ]]; then
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
             echo
             echo "Your mother would be dissapointed in you."
             exit 0

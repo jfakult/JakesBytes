@@ -1,0 +1,10 @@
+[Unit]
+Description=Update timezone when a new network connection appears
+
+[Service]
+ExecStart=%h/bin/timezone_on_network.sh
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

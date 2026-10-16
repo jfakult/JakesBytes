@@ -1,0 +1,8 @@
+# restic --files-from (whitelist). One absolute path per line.
+# Carried over from backup.sh targetFolders, narrowed to /home/jake
+/etc
+/usr/local
+/root
+/home/jake
+# Package manifests, generated before each run (see README)
+/var/backup-manifests

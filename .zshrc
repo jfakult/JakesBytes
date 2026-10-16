@@ -25,9 +25,16 @@ alias less="less -R"
 alias hello="echo Hi!"
 alias whoa="That was crazy!"
 alias speed="speedtest-cli --secure"
-alias cp2="rsync -ah --info=progress2 $1 $2"
+alias cp2_old="rsync -ah --no-group --no-owner --no-inc-recursive --info=progress2"
+
+cp2() { rclone copy -P --transfers 8 "$@" && sync -f "${@: -1}"; }
 alias nordon="nordvpn connect"
 alias nordoff="nordvpn disconnect"
+
+# NAS mounts (your two most-used nas_mount.sh calls, per sudo/journal history)
+alias mount_webapps="nas_mount.sh /mnt/NAS/Webapps /mnt/user/Server_WebappsCache 192.168.1.199"
+alias mount_media="nas_mount.sh /mnt/NAS/Media /mnt/user/Server_Media 192.168.1.199"
+alias mount_backup="nas_mount.sh /mnt/NAS/Backup /mnt/user/Backup 192.168.1.199"
 
 # SSH key caching
 #pkill -f ssh-agent
@@ -118,3 +125,10 @@ eval "$(pyenv init - zsh)"
 
 update_system_on_boot.sh
 export PATH="$HOME/.local/bin:$PATH"
+
+# bun completions
+[ -s "/home/jake/.bun/_bun" ] && source "/home/jake/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
