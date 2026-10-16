@@ -23,8 +23,8 @@ Usage: sudo backup_restic.sh [--estimate | --watch | -h | --help]
 Before backing up it copies the PVE config and the Unraid config/appdata restic repos from
 the NAS mount (Butlah/<name>) into /root/backup with rsync (excluded from the restic backup).
 Pull failures only warn.
-Before backing up it also runs ~/.config/prep_repo.sh as jake, then commits and pushes the
-~/.config git repo (dated message; failures only warn).
+Before backing up it also runs ~/.config/prep_repo.sh as jake, then commits the
+~/.config git repo locally (dated message; failures only warn). It does not push.
 Must be run as root. Mounts /mnt/NAS/Backup if needed and unmounts it again when
 done (only if this script mounted it). Repo: /mnt/NAS/Backup/Framework.
 Lists:  include.txt / exclude.txt next to this script.
@@ -113,9 +113,8 @@ if ! restic cat config &>/dev/null; then
   restic init
 fi
 
-# Refresh ~/.config/_packages (+ rc files, ~/bin) and push the config repo to GitHub.
-# Runs as the normal user (their git/ssh setup). Never fails the backup: a push problem
-# (offline, key needs a passphrase) just prints a warning.
+# Refresh ~/.config/_packages (+ rc files, ~/bin) and commit the config repo locally (no push for now).
+# Runs as the normal user. Never fails the backup: a problem just prints a warning.
 USER_NAME=jake
 CONF="/home/$USER_NAME/.config"
 # Desktop notification from root (same trick as backup_nag.sh); never fails the backup
@@ -137,10 +136,9 @@ if runuser -u "$USER_NAME" -- bash "$CONF/prep_repo.sh" >/dev/null; then
       git commit -q -m "Backup $(date "+%Y-%m-%d %H:%M"): packages, services, dotfiles" \
         -m "Automatic snapshot from backup_restic.sh: $2 official + $3 AUR packages, $4 enabled services, shell rc files and ~/bin scripts."
     fi
-    GIT_SSH_COMMAND="ssh -o ConnectTimeout=15 -o BatchMode=yes" git push -q
   ' _ "$CONF" "$n_pkg" "$n_aur" "$n_svc" || {
-    echo "!!!  Config repo commit/push failed (continuing)  !!!"
-    notify_user -u normal -t 10000 "Config git push failed" "The backup is continuing. Check ~/.config (git status / git push)."
+    echo "!!!  Config repo commit failed (continuing)  !!!"
+    notify_user -u normal -t 10000 "Config git commit failed" "The backup is continuing. Check ~/.config (git status)."
   }
 else
   echo "!!!  prep_repo.sh failed (continuing)  !!!"
@@ -168,7 +166,8 @@ for d in proxmox-config unraid-config unraid-appdata; do
     rsync -a --delete --no-inc-recursive --info="$RSYNC_INFO" \
       "$MNT/Butlah/$d/" "$PULL_DIR/$d/" || pull_failed "$d"
   else
-    pull_failed "$d (missing $MNT/Butlah/$d)"
+    # Not an error: the source backup may simply not exist yet (no notification)
+    echo "Skipping $d: $MNT/Butlah/$d does not exist (yet)"
   fi
 done
 
