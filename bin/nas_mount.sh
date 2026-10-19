@@ -28,6 +28,17 @@ if mountpoint -q "$MNT"; then
   exit 0
 fi
 
+# NFS support missing from the running kernel (e.g. kernel updated without reboot)
+if ! grep -qw nfs4 /proc/filesystems && ! sudo modprobe nfs 2>/dev/null; then
+  echo "Error: this kernel ($(uname -r)) has no NFS support and the module can't be loaded."
+  if [[ ! -d "/usr/lib/modules/$(uname -r)" ]]; then
+    echo "Modules for the running kernel are gone (likely updated without reboot). Reboot to fix."
+  else
+    echo "Check that the nfs module/nfs-utils is installed."
+  fi
+  exit 1
+fi
+
 echo "Mounting ${SERVER}:${EXPORT} -> ${MNT} (NFS v4.2)"
 sudo mount -t nfs -o vers=4.2,rw,noatime,nconnect=4,timeo=100,retrans=3,soft "${SERVER}:${EXPORT}" "$MNT" -v
 

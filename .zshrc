@@ -35,6 +35,7 @@ alias nordoff="nordvpn disconnect"
 alias mount_webapps="nas_mount.sh /mnt/NAS/Webapps /mnt/user/Server_WebappsCache 192.168.1.199"
 alias mount_media="nas_mount.sh /mnt/NAS/Media /mnt/user/Server_Media 192.168.1.199"
 alias mount_backup="nas_mount.sh /mnt/NAS/Backup /mnt/user/Backup 192.168.1.199"
+alias mount_share="nas_mount.sh /mnt/NAS/Share /mnt/user/ButlahShare 192.168.1.199"
 
 # SSH key caching
 #pkill -f ssh-agent

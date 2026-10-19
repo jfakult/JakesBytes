@@ -3,10 +3,10 @@
 icon: &icon
   font: "HackNerdFont:pixelsize=28"
 
-background_color: &background_color 552211FF
-text_color: &text_color FFFFEEFF
-text_color_dim: &text_color_dim 99BB99FF
-text_color_error: &text_color_error FF5522FF
+background_color: &background_color ${MAYBAR_BG}
+text_color: &text_color ${MAYBAR_TEXT}
+text_color_dim: &text_color_dim ${MAYBAR_TEXT_DIM}
+text_color_error: &text_color_error ${MAYBAR_TEXT_ERROR}
 
 # friendly light pink
 mic_color: &mic_color FFB6C1FF
@@ -70,11 +70,11 @@ bar:
           volume: &volume
             conditions:
               type == "sink" && ~muted:
-                - string: {text: "\uF130 ", <<: *icon, foreground: *mic_color, on-click: { left: "~/bin/set_volume.sh mute", middle: "~/bin/sound_source_toggle.sh", right: "/usr/bin/pavucontrol", wheel-down: "~/bin/set_volume.sh 1%+", wheel-up: "~/bin/set_volume.sh 1%-" }}
-                - string: {text: "{cubic_volume}%", on-click: { left: "~/bin/set_volume.sh mute", middle: "~/bin/sound_source_toggle.sh", right: "/usr/bin/pavucontrol", wheel-down: "~/bin/set_volume.sh 1%+", wheel-up: "~/bin/set_volume.sh 1%-"}}
+                - string: {text: "\uF130 ", <<: *icon, foreground: *mic_color, on-click: &vol_click { left: "~/bin/set_volume.sh mute", middle: "~/bin/sound_source_toggle.sh", right: "/usr/bin/pavucontrol", wheel-down: "~/bin/set_volume.sh 1%+", wheel-up: "~/bin/set_volume.sh 1%-" }}
+                - string: {text: "{cubic_volume}%", on-click: *vol_click}
               type == "sink" && muted:
-                - string: {text: "\uF131  ", <<: *icon, foreground: *text_color_dim, on-click: { left: "~/bin/set_volume.sh mute", middle: "~/bin/sound_source_toggle.sh", right: "/usr/bin/pavucontrol", wheel-down: "~/bin/set_volume.sh 1%+", wheel-up: "~/bin/set_volume.sh 1%-" }}
-                - string: {text: "{cubic_volume}%", foreground: *text_color_dim, on-click: { left: "~/bin/set_volume.sh mute", middle: "~/bin/sound_source_toggle.sh", right: "/usr/bin/pavucontrol", wheel-down: "~/bin/set_volume.sh 1%+", wheel-up: "~/bin/set_volume.sh 1%-"}}
+                - string: {text: "\uF131  ", <<: *icon, foreground: *text_color_dim, on-click: *vol_click}
+                - string: {text: "{cubic_volume}%", foreground: *text_color_dim, on-click: *vol_click}
         content:
           map:
             <<: *volume
@@ -128,8 +128,8 @@ bar:
                   map:
                     conditions:
                       state == down || state == unknown || state == not-present || state == lower-layer-down || state == testing || state == dormant:
-                        - string: {text: "\uF4AD", <<: *icon, foreground: *ssid_color, on-click: "~/bin/wifi.sh"}
-                        - string: {text: " offline", foreground: *text_color_dim, on-click: "~/bin/wifi.sh"}
+                        - string: {text: "\uF4AD", <<: *icon, foreground: *ssid_color, on-click: &wifi_click "~/bin/wifi.sh"}
+                        - string: {text: " offline", foreground: *text_color_dim, on-click: *wifi_click}
 
                       state == up:
                         # wifi icon ramp + SSID
@@ -138,19 +138,19 @@ bar:
                             min: -100
                             max: -22
                             items:
-                              - string: {text: "\U000F08FE", foreground: *ssid_color, <<: *icon, on-click: "~/bin/wifi.sh"}
-                              - string: {text: "\U000F08F4", foreground: *ssid_color, <<: *icon, on-click: "~/bin/wifi.sh"}
-                              - string: {text: "\U000F08F6", foreground: *ssid_color, <<: *icon, on-click: "~/bin/wifi.sh"}
-                              - string: {text: "\U000F08F8", foreground: *ssid_color, <<: *icon, on-click: "~/bin/wifi.sh"}
-                              - string: {text: "\U000F08FA", foreground: *ssid_color, <<: *icon, on-click: "~/bin/wifi.sh"}
-                        - string: {text: " {ssid}", foreground: *text_color, on-click: "~/bin/wifi.sh"}
+                              - string: {text: "\U000F08FE", foreground: *ssid_color, <<: *icon, on-click: *wifi_click}
+                              - string: {text: "\U000F08F4", foreground: *ssid_color, <<: *icon, on-click: *wifi_click}
+                              - string: {text: "\U000F08F6", foreground: *ssid_color, <<: *icon, on-click: *wifi_click}
+                              - string: {text: "\U000F08F8", foreground: *ssid_color, <<: *icon, on-click: *wifi_click}
+                              - string: {text: "\U000F08FA", foreground: *ssid_color, <<: *icon, on-click: *wifi_click}
+                        - string: {text: " {ssid}", foreground: *text_color, on-click: *wifi_click}
 
                         # IP (prefer v4)
-                        - string: {text: " ({ipv4})", foreground: *text_color, on-click: "~/bin/wifi.sh"}
+                        - string: {text: " ({ipv4})", foreground: *text_color, on-click: *wifi_click}
 
                       default:
-                        - string: {text: "\uF254", <<: *icon, foreground: *ssid_color, on-click: "~/bin/wifi.sh"}
-                        - string: {text: " {ssid}", foreground: *text_color, on-click: "~/bin/wifi.sh"}
+                        - string: {text: "\uF254", <<: *icon, foreground: *ssid_color, on-click: *wifi_click}
+                        - string: {text: " {ssid}", foreground: *text_color, on-click: *wifi_click}
 
     - script:
         path: ~/bin/get_network_speed.sh
@@ -168,10 +168,15 @@ bar:
         content:
           - string: {text: "{time}", foreground: *text_color, on-click: "galendae"}
 
-    - backlight:
-          name: amdgpu_bl1
+    - script:
+          path: /home/jake/bin/maybar_brightness.sh
           content:
-            - string: { text: "󰍺 ", foreground: 4488ffff, on-click: { left: "/bin/sh -c 'GTK_THEME=Adwaita:dark /usr/bin/wdisplays'" } }
+            - map:
+                conditions:
+                  dimmed:
+                    string: { text: "󰍺 ", foreground: FFAA33FF, on-click: { left: "/bin/sh -c 'GTK_THEME=Adwaita:dark /usr/bin/wdisplays'" } }
+                  ~dimmed:
+                    string: { text: "󰍺 ", foreground: 4488ffff, on-click: { left: "/bin/sh -c 'GTK_THEME=Adwaita:dark /usr/bin/wdisplays'" } }
             - string: { text: "{percent}%", on-click: { left: "/bin/sh -c 'GTK_THEME=Adwaita:dark /usr/bin/wdisplays'" } }
 
     - battery:
@@ -186,16 +191,16 @@ bar:
                     min: 0
                     max: 100
                     items:
-                      - string: {text: ' ', foreground: ffa600ff, <<: *icon, on-click: { left: "~/bin/power/set_power_profile.sh"}}
-                      - string: {text: ' ', foreground: ff0000ff, <<: *icon, on-click: { left: "~/bin/power/set_power_profile.sh"}}
-                      - string: {text: ' ', <<: *icon, on-click: { left: "~/bin/power/set_power_profile.sh"}}
-                      - string: {text: ' ', <<: *icon, on-click: { left: "~/bin/power/set_power_profile.sh"}}
-                      - string: {text: ' ', <<: *icon, on-click: { left: "~/bin/power/set_power_profile.sh"}}
-                      - string: {text: ' ', <<: *icon, on-click: { left: "~/bin/power/set_power_profile.sh"}}
-                      - string: {text: ' ', <<: *icon, on-click: { left: "~/bin/power/set_power_profile.sh"}}
-                      - string: {text: ' ', foreground: bfff00ff, <<: *icon, on-click: { left: "~/bin/power/set_power_profile.sh"}}
-                      - string: {text: ' ', foreground: bfff00ff, <<: *icon, on-click: { left: "~/bin/power/set_power_profile.sh"}}
-                - string: {text: "{capacity}%", foreground: *text_color, on-click: { left: "~/bin/power/set_power_profile.sh"}}
+                      - string: {text: ' ', foreground: ffa600ff, <<: *icon, on-click: &power_click { left: "~/bin/power/set_power_profile.sh"}}
+                      - string: {text: ' ', foreground: ff0000ff, <<: *icon, on-click: *power_click}
+                      - string: {text: ' ', <<: *icon, on-click: *power_click}
+                      - string: {text: ' ', <<: *icon, on-click: *power_click}
+                      - string: {text: ' ', <<: *icon, on-click: *power_click}
+                      - string: {text: ' ', <<: *icon, on-click: *power_click}
+                      - string: {text: ' ', <<: *icon, on-click: *power_click}
+                      - string: {text: ' ', foreground: bfff00ff, <<: *icon, on-click: *power_click}
+                      - string: {text: ' ', foreground: bfff00ff, <<: *icon, on-click: *power_click}
+                - string: {text: "{capacity}%", foreground: *text_color, on-click: *power_click}
         content:
           map:
             conditions:
@@ -204,9 +209,9 @@ bar:
               state == discharging:
                 <<: *discharging
               state == charging: &charging
-                - string: {text: '', foreground: bfff00ff, <<: *icon, on-click: { left: "~/bin/power/set_power_profile.sh"}}
-                - string: {text: "{capacity}%", on-click: { left: "~/bin/power/set_power_profile.sh"}}
+                - string: {text: '', foreground: bfff00ff, <<: *icon, on-click: *power_click}
+                - string: {text: "{capacity}%", on-click: *power_click}
               state == full:
-                - string: {text: '', foreground: bfff00ff, <<: *icon, on-click: { left: "~/bin/power/set_power_profile.sh"}}
-                - string: {text: "{capacity}%", on-click: { left: "~/bin/power/set_power_profile.sh"}}
+                - string: {text: '', foreground: bfff00ff, <<: *icon, on-click: *power_click}
+                - string: {text: "{capacity}%", on-click: *power_click}
               state == "not charging": *charging

@@ -71,6 +71,10 @@ exec_always --no-startup-id swayidle -w \
 # Since swayidle doesn't listen for audio output
 exec_always --no-startup-id sway-audio-idle-inhibit
 
+# Video players: inhibit idle while the window is visible (audio inhibit misses these)
+for_window [app_id="vlc"] inhibit_idle visible
+for_window [class="vlc"] inhibit_idle visible
+
 ### Input configuration
 #
 # Example configuration:
@@ -264,8 +268,8 @@ bindsym $mod+r mode "resize"
 #    }
 #}
 
-# start yambar and send logs to ~/yambar.log  (can add YAMBAR_DISABLE_NL80211=1)
-exec_always --no-startup-id 'systemctl --user restart yambar'
+# start maybar and send logs to ~/maybar.log  (can add YAMBAR_DISABLE_NL80211=1)
+exec_always --no-startup-id 'systemctl --user restart maybar'
 
 # kanshi: auto update displays / output positions
 exec_always --no-startup-id "kanshi -c ~/.config/kanshi/config"

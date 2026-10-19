@@ -1,10 +1,9 @@
 [Unit]
-Description=Yambar status bar
+Description=Maybar status bar
 After=graphical-session.target
 
 [Service]
-ExecStart=/usr/bin/yambar
-ExecStop=/usr/bin/pkill -f yambar
+ExecStart=/home/jake/bin/maybar_launch.sh
 Restart=on-failure
 RestartSec=1
 

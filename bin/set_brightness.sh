@@ -39,6 +39,10 @@ notify_user() {
 # Set hardware brightness
 brightnessctl set -- "$1" >/dev/null && notify_user && brightnessctl get > /tmp/last_brightness && chown jake:jake /tmp/last_*
 
+# Record whether software dimming is on (gammastep exits after applying, so we can't just check for the process)
+if [ "$2" = "--no-gamma" ]; then echo false > /tmp/software_dimmed; else echo true > /tmp/software_dimmed; fi
+pkill -USR1 -f maybar_brightness.sh # tell the bar to refresh now
+
 current_brightness=$(brightnessctl get)
 #echo "Current brightness: $current_brightness"
 

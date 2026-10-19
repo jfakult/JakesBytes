@@ -10,12 +10,7 @@ echo "set \$tab_color $COLOR_DARK_BACKGROUND" > ~/.config/sway/env
 echo "set \$font_color $COLOR_DARK_TEXT" >> ~/.config/sway/env
 echo "font $FONT $FONT_SIZE" >> ~/.config/sway/env
 
-# Manually dump our WM theme into yambar config
-# Have to use sed to modify in place since the yambar guy never closed https://codeberg.org/dnkl/yambar/issues/96
-sed -i'' "s/background_color: \&background_color .*/background_color: \&background_color ${COLOR_DARK_BACKGROUND:1}/g" "$HOME/.config/yambar/config.yml"
-sed -i'' "s/text_color: \&text_color .*/text_color: \&text_color ${COLOR_DARK_TEXT:1}/g" "$HOME/.config/yambar/config.yml"
-sed -i'' "s/text_color_dim: \&text_color_dim .*/text_color_dim: \&text_color_dim ${COLOR_DARK_TEXT_ALT:1}/g" "$HOME/.config/yambar/config.yml"
-sed -i'' "s/text_color_error: \&text_color_error .*/text_color_error: \&text_color_error ${COLOR_DARK_TEXT_ERROR:1}/g" "$HOME/.config/yambar/config.yml"
+# maybar reads its theme colours from env vars set in maybar_launch.sh
 
 
 #Galendae (calendar) style overwrite
@@ -56,7 +51,7 @@ if [ -z "$sway_sock" ]; then
     rm /tmp/sway_launched
 else
     pkill -f ^swayidle
-    pkill -f ^yambar
+    pkill -x maybar
     pkill -f sway-audio-idle-inhibit
     swaymsg -s $sway_sock reload
 fi
