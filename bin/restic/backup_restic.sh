@@ -73,7 +73,10 @@ trap cleanup EXIT
 
 if ! mountpoint -q "$MNT"; then
   echo "Mounting NAS backup share"
-  mount -t nfs -o vers=4.2,rw,noatime,nconnect=4,timeo=100,retrans=3,soft "$NAS" "$MNT"
+  if ! mount -t nfs -o vers=4.2,rw,noatime,nconnect=4,timeo=100,retrans=3,soft "$NAS" "$MNT"; then
+    echo "!!!  Could not mount the NAS share $NAS on $MNT (is the NAS reachable?)  !!!"
+    exit 3
+  fi
   mounted_by_us=1
 fi
 mkdir -p "$MNT/Framework"

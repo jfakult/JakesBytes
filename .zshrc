@@ -27,7 +27,29 @@ alias whoa="That was crazy!"
 alias speed="speedtest-cli --secure"
 alias cp2_old="rsync -ah --no-group --no-owner --no-inc-recursive --info=progress2"
 
-cp2() { rclone copy -P --transfers 8 "$@" && sync -f "${@: -1}"; }
+# cp-style: cp2 [--rclone-flag[=val]...] src... dest_dir
+# dirs land inside dest_dir (like cp -r), files are copied into dest_dir
+cp2() {
+	local -a flags paths
+	local a src dest
+	for a in "$@"; do
+		if [[ $a == -* ]]; then flags+=("$a"); else paths+=("$a"); fi
+	done
+	if (( ${#paths} < 2 )); then
+		echo "usage: cp2 [rclone flags] src... dest_dir" >&2
+		return 1
+	fi
+	dest=${paths[-1]%/}
+	for src in "${(@)paths[1,-2]}"; do
+		src=${src%/}
+		if [[ -d $src ]]; then
+			rclone copy -P --transfers 8 "${flags[@]}" "$src" "$dest/${src:t}" || return
+		else
+			rclone copy -P --transfers 8 "${flags[@]}" "$src" "$dest" || return
+		fi
+	done
+	sync -f "$dest"
+}
 alias nordon="nordvpn connect"
 alias nordoff="nordvpn disconnect"
 

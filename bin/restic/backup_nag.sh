@@ -149,6 +149,7 @@ fi
 
 # ---- estimate (cached, since a dry run scans everything) ----
 est=-1
+est_fail=""   # set when the NAS/repo can't be reached, so we can notify
 if (( TEST )); then
   est=$FAKE_EST
 else
@@ -158,11 +159,23 @@ else
     est=$(sed -n 's/^ESTIMATE_SECONDS=//p' "$STATE/est.out"); est=${est:--1}
     # Only cache a real estimate: a failure (NAS asleep, etc.) is retried on the next run
     if (( est >= 0 )); then echo "$est" > "$STATE/est"; rm -f "$STATE/est.err"
-    else say "estimate unavailable: $(grep -v '^ESTIMATE_' "$STATE/est.out" | tail -n1)"; fi
+    else est_fail="$(grep -v '^ESTIMATE_' "$STATE/est.out" | tail -n1)"; say "estimate unavailable: $est_fail"; fi
   else
-    say "estimate run FAILED (exit $?): $(tail -n1 "$STATE/est.out")"
+    est_fail="$(tail -n1 "$STATE/est.out")"; say "estimate run FAILED (exit $?): $est_fail"
   fi
   (( est >= 0 )) && say "estimated backup time: ${est}s"
+fi
+
+# ---- NAS/repo unreachable: the backup is due but can't run, so say so (at most every 4h) ----
+if [[ -n "$est_fail" ]]; then
+  if [[ ! -f "$STATE/unreachable_notified" || $(( now - $(stat -c %Y "$STATE/unreachable_notified") )) -ge $((4 * 3600)) ]]; then
+    notify -u normal -t 15000 "Backup can't run" "Last backup: $age. ${est_fail:0:150}"
+    touch "$STATE/unreachable_notified"
+  else
+    say "already notified about the unreachable NAS in the last 4h"
+  fi
+else
+  rm -f "$STATE/unreachable_notified"
 fi
 
 # ---- quick enough: just do it ----
