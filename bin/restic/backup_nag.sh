@@ -21,9 +21,11 @@ backup_nag.sh - decides when to back up the laptop, and nags if it's overdue
 Usage: backup_nag.sh [--test [ESTIMATE_SECONDS] | --status | --watch | -h | --help]
 
 Meant to run as root from a system timer (about every 30 min):
-  last backup < 1 day old          do nothing
+  last backup < 1 day old          do nothing (and log why)
   estimate < 3 min                 run backup_restic.sh automatically + mako notifications
-  last backup >= 3 days old        mako heads-up and a wofi menu:
+  estimate unavailable (NAS down)  notification "Backup can't run" (at most every 4h), retried next run
+  slow/unknown estimate and last
+  backup >= 3 days old             mako heads-up and a wofi menu:
                                      Run now / Ask me tomorrow / Ask me next week
   menu closed without choosing     ask again in an hour
 
@@ -39,7 +41,7 @@ Options:
                     Backup output is logged there too. Ctrl-C to stop.
   -h, --help        Show this help.
 
-State: /var/lib/restic-backup/nag/ (snooze time, cached estimate, logs)
+State: /var/lib/restic-backup/nag/ (snooze time, cached estimate, logs, est_failures.log)
 Colors: taken from ~/.config/system_styles.sh
 USAGE
 }
@@ -148,6 +150,14 @@ if (( TEST == 0 )); then
 fi
 
 # ---- estimate (cached, since a dry run scans everything) ----
+# The failure reason from est.out: the "Cannot open"/"!!!" line, not the trailing "Unmounting" one.
+# Also appended to a history file, since est.out is overwritten on every run.
+reason_line() {
+  local r; r=$(grep -E '^(Cannot|!!!|mount)|rror' "$STATE/est.out" | tail -n1)
+  : "${r:=$(grep -v -e '^ESTIMATE_' -e '^Unmounting' "$STATE/est.out" | tail -n1)}"
+  { echo "== $(date '+%F %T')"; cat "$STATE/est.out"; } >> "$STATE/est_failures.log"
+  echo "$r"
+}
 est=-1
 est_fail=""   # set when the NAS/repo can't be reached, so we can notify
 if (( TEST )); then
@@ -159,9 +169,9 @@ else
     est=$(sed -n 's/^ESTIMATE_SECONDS=//p' "$STATE/est.out"); est=${est:--1}
     # Only cache a real estimate: a failure (NAS asleep, etc.) is retried on the next run
     if (( est >= 0 )); then echo "$est" > "$STATE/est"; rm -f "$STATE/est.err"
-    else est_fail="$(grep -v '^ESTIMATE_' "$STATE/est.out" | tail -n1)"; say "estimate unavailable: $est_fail"; fi
+    else est_fail="$(reason_line)"; say "estimate unavailable: $est_fail"; fi
   else
-    est_fail="$(tail -n1 "$STATE/est.out")"; say "estimate run FAILED (exit $?): $est_fail"
+    est_fail="$(reason_line)"; say "estimate run FAILED (exit $?): $est_fail"
   fi
   (( est >= 0 )) && say "estimated backup time: ${est}s"
 fi

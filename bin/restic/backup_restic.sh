@@ -28,7 +28,8 @@ Before backing up it also runs ~/.config/prep_repo.sh as jake, then commits the
 Must be run as root. Mounts /mnt/NAS/Backup if needed and unmounts it again when
 done (only if this script mounted it). Repo: /mnt/NAS/Backup/Framework.
 Lists:  include.txt / exclude.txt next to this script.
-State:  /var/lib/restic-backup/ (last_success, last_summary)
+A failed NAS mount exits with code 3. --estimate doesn't write the package manifests.
+State:  /var/lib/restic-backup/ (last_success, last_summary, last_stats)
 Keeps:  7 daily, 4 weekly, 12 monthly, 2 yearly snapshots.
 USAGE
 }
@@ -57,6 +58,8 @@ WAN_BPS=$((10 * 1000 * 1000 / 8))
 # No encryption wanted. restic always needs a repo password, so use an empty one;
 # --insecure-no-password has to be passed to every restic command.
 export RESTIC_REPOSITORY="$MNT/Framework"
+# systemd runs this without $HOME, and restic needs it to locate its cache dir
+export HOME="${HOME:-/root}"
 restic() { command restic --insecure-no-password "$@"; }
 
 mode="${1:-backup}"
@@ -90,8 +93,14 @@ ARGS=(
 
 if [[ "$mode" == "--estimate" ]]; then
   # No repo yet means nothing to compare against
-  if ! err=$(restic cat config 2>&1 >/dev/null); then
-    echo "Cannot open repo $RESTIC_REPOSITORY: ${err//$'\n'/ }"
+  # The NAS can be slow to respond right after mounting (disks spinning up, soft NFS mount),
+  # so give the repo a few tries before calling it unreachable.
+  for try in 1 2 3; do
+    err=$(restic cat config 2>&1 >/dev/null) && break
+    (( try < 3 )) && sleep 15
+  done
+  if [[ -n "$err" ]] && ! restic cat config &>/dev/null; then
+    echo "Cannot open repo $RESTIC_REPOSITORY after 3 tries: ${err//$'\n'/ }"
     echo "ESTIMATE_SECONDS=-1"; exit 0
   fi
 
